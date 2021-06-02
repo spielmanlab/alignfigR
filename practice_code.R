@@ -8,7 +8,23 @@ hi <- data.frame(x1 = c(1,1,1,1.5,2,3,3),
                  f = c("a", "a", "a", "a", "a", "b", "b"), 
                  l = c(1,2,3,4,5,6,7))
 ggplot(hi) +
-  geom_rect(data = hi, mapping = aes(xmin=x1,xmax=x2,ymin=y1,ymax=y2,fill=f), linetype = 2, color = "dodgerblue", size = 1, alpha = .75, show.legend = FALSE) +
-  geom_text(data = hi, aes(x=(x2-x1)/2 + x1, y=(y2-y1)/2 + y1, label=l), size = 5, color = "black") +
+  geom_rect(data = hi, mapping = aes(xmin=x1,xmax=x2,ymin=y1,ymax=y2,fill=f), 
+            linetype = 2, color = "dodgerblue", size = 1, alpha = .75, 
+            show.legend = FALSE) +
+  geom_text(data = hi, aes(x=(x2-x1)/2 + x1, y=(y2-y1)/2 + y1, label=l), 
+            size = 5, color = "black") +
   scale_fill_discrete("Legend") +
   theme_void()
+
+ggplot(iris) + 
+  aes(Sepal.Width, 
+      Sepal.Length) +
+  geom_tile(aes(fill = Petal.Length),
+            color = "black") +
+  theme_light() +
+  scale_fill_continuous("Petal Length")
+
+ggplot(faithfuld) +
+  aes(waiting,
+      eruptions) +
+  geom_raster(aes(fill = density))
