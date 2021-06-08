@@ -125,7 +125,8 @@ plot_alignment <- function(seq_list, palette = NA, taxa = c(), plot_step = 1, ta
   theme_set(theme_bw() + theme(panel.grid.minor = element_blank(), panel.grid.major = element_blank(), panel.border = element_blank()))
   if ( taxon_labels == FALSE){
     p <- ggplot() +
-      geom_rect(plot_frame, mapping=aes(xmin=x1-1, xmax=x2-1, ymin=y1-1, ymax=y2-1, fill = seq), linetype=0) + scale_fill_manual(values=pal, name = legend_title)
+      geom_rect(plot_frame, mapping=aes(xmin=x1-1, xmax=x2-1, ymin=y1-1, ymax=y2-1, fill = seq), linetype=0) + scale_fill_manual(values=pal) +
+      labs(title = legend_title)
   }
   else {
     p <- ggplot() + geom_rect(plot_frame, mapping=aes(xmin=x1-1, xmax=x2-1, ymin =
@@ -134,7 +135,7 @@ plot_alignment <- function(seq_list, palette = NA, taxa = c(), plot_step = 1, ta
   p
 }
 read_alignment("~/Desktop/alignfigR/read_alignment/protein.fasta") -> protein_seqs
-plot_alignment(protein_seqs, typemsa = "random")
+plot_alignment(protein_seqs, typemsa = "random", legend_title = "New Graph")
 
 
 
