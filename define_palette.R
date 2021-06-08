@@ -23,7 +23,7 @@ define_palette <- function(typemsa, uniques = NA, custom_colors = NA){
                "D" = "lemonchiffon", "E" = "lightseagreen", 
                "N" = "darkgreen", "Q" = "thistle",
                "I" = "lightblue1", "L" = "lightcyan", 
-               "M" = "paletorquoise", "V" = "powderblue",
+               "M" = "violet", "V" = "powderblue",
                "F" = "lavender", "W" = "lightcoral", 
                "Y" = "plum", "V" = "moccasin",
                "H" = "navy", "Z" = "tan",
