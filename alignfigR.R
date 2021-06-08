@@ -13,9 +13,8 @@ read_alignment <- function(file){
   seq_name <- ""
   # All about getting the organism identifiers in a vector
   for (line in raw_data){
-    # New sequence record? Reset numbering
     # If the lines begins with a ">"
-    if ( grepl("^>", line) ){
+    if (grepl("^>", line)) {
       # Then the entire line (surrounded in "") is set  equal to seq_name)
       seq_name <- sub("^>", "", line)
       # Makes an empty vector of the organism identifiers
@@ -35,7 +34,7 @@ read_alignment <- function(file){
   # Check to make sure all alignments have the same number of proteins
   if ( sum(lengths != lengths[1]) != 0 )
     stop("Your provided file is not an alignment. Please provide an alignment file in FASTA format to use alignfigR.")
-  # Instead return as a WIDE tibble
+  # Instead return as a tibble
   tibble::as_tibble(seq_list) 
 }
 
@@ -45,9 +44,9 @@ extract_subalign <- function(seq_list, plot_step = 1, tlist = c(), clist = c(), 
   if (length(tlist) == 0){
     sub_seqs_raw <- seq_list
   }else if (texcl){
-    sub_seqs_raw <- seq_list[!(names(seq_list) %in% tlist)] # Exclude sequences in the provided list
-  }else
-  {
+    # Exclude sequences in the provided list
+    sub_seqs_raw <- seq_list[!(names(seq_list) %in% tlist)] 
+  } else {
     sub_seqs_raw <- seq_list[tlist]
   }
   # Further subset the sequences to contain only the desired columns
@@ -125,15 +124,20 @@ plot_alignment <- function(seq_list, taxa = c(), plot_step = 1, taxon_labels = F
   theme_set(theme_bw() + theme(panel.grid.minor = element_blank(), panel.grid.major = element_blank(), panel.border = element_blank()))
   if (taxon_labels == FALSE){
     p <- ggplot() +
-      geom_rect(plot_frame, mapping=aes(xmin=x1-1, xmax=x2-1, ymin=y1-1, ymax=y2-1, fill = seq), linetype=0) + scale_fill_manual(values=pal, name = legend_title) +
+      geom_rect(plot_frame, mapping=aes(xmin=x1-1, xmax=x2-1, ymin=
+                                          y1-1, ymax=y2-1, fill = seq), linetype=0) +       
+      scale_fill_manual(values=pal, 
+                        name = legend_title) +
       labs(title = graph_title)
   }
   else {
-    p <- ggplot() + geom_rect(plot_frame, mapping=aes(xmin=x1-1, xmax=x2-1, ymin =
-                                                        y1-1, ymax=y2-1, fill = seq), linetype=0) +
+    p <- ggplot() + 
+      geom_rect(plot_frame, mapping=aes(xmin=x1-1, xmax=x2-1, ymin =
+                                          y1-1, ymax=y2-1, fill = seq), linetype=0) +
       labs(title = graph_title) +
-      scale_fill_manual(values=pal, name = legend_title) +
-                              scale_y_discrete(limits = names(seq_list))
+      scale_fill_manual(values=pal, 
+                        name = legend_title) +
+      scale_y_discrete(limits = names(seq_list))
   }
   p
 }
@@ -141,8 +145,7 @@ read_alignment("~/Desktop/alignfigR/read_alignment/protein.fasta") -> protein_se
 plot_alignment(protein_seqs, typemsa = "free", legend_title = "New Legend", taxon_labels = TRUE, graph_title = "New Graph")
 
 
-?theme
-?element_blank
+
 
 
 
