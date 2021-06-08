@@ -113,7 +113,7 @@ define_palette <- function(typemsa, uniques = NA, custom_colors = NA){
   palette
 }
 
-plot_alignment <- function(seq_list, palette = NA, taxa = c(), plot_step = 1, taxon_labels = FALSE, columns = c(), exclude_taxa = FALSE, exclude_columns = FALSE, include_columns = FALSE, legend_title = "Character", typemsa, custom_colors = NA)
+plot_alignment <- function(seq_list, taxa = c(), plot_step = 1, taxon_labels = FALSE, columns = c(), exclude_taxa = FALSE, exclude_columns = FALSE, include_columns = FALSE, legend_title = "Character", graph_title = "Character", typemsa, custom_colors = NA)
 {
   # Extract desired alignment subset
   plot_frame <- extract_subalign(seq_list, plot_step, taxa, columns, exclude_taxa, exclude_columns, include_columns)
@@ -123,24 +123,26 @@ plot_alignment <- function(seq_list, palette = NA, taxa = c(), plot_step = 1, ta
   pal <- define_palette(typemsa, uniques, custom_colors)
   # Plot
   theme_set(theme_bw() + theme(panel.grid.minor = element_blank(), panel.grid.major = element_blank(), panel.border = element_blank()))
-  if ( taxon_labels == FALSE){
+  if (taxon_labels == FALSE){
     p <- ggplot() +
-      geom_rect(plot_frame, mapping=aes(xmin=x1-1, xmax=x2-1, ymin=y1-1, ymax=y2-1, fill = seq), linetype=0) + scale_fill_manual(values=pal) +
-      labs(title = legend_title)
+      geom_rect(plot_frame, mapping=aes(xmin=x1-1, xmax=x2-1, ymin=y1-1, ymax=y2-1, fill = seq), linetype=0) + scale_fill_manual(values=pal, name = legend_title) +
+      labs(title = graph_title)
   }
   else {
     p <- ggplot() + geom_rect(plot_frame, mapping=aes(xmin=x1-1, xmax=x2-1, ymin =
-                                                        y1-1, ymax=y2-1, fill = seq), linetype=0) +                                         scale_fill_manual(values=pal, name = legend_title) +                                 scale_y_discrete(limits = names(seq_list))
+                                                        y1-1, ymax=y2-1, fill = seq), linetype=0) +
+      labs(title = graph_title) +
+      scale_fill_manual(values=pal, name = legend_title) +
+                              scale_y_discrete(limits = names(seq_list))
   }
   p
 }
 read_alignment("~/Desktop/alignfigR/read_alignment/protein.fasta") -> protein_seqs
-plot_alignment(protein_seqs, typemsa = "free", legend_title = "New Graph")
+plot_alignment(protein_seqs, typemsa = "free", legend_title = "New Legend", taxon_labels = TRUE, graph_title = "New Graph")
 
 
-
-
-
+?theme
+?element_blank
 
 
 
