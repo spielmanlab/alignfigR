@@ -2,8 +2,6 @@ library(magrittr)
 library(tidyverse)
 null_color <- "grey85"
 
-
-
 read_alignment <- function(file){
   # readLines appears to separate lines so there's a away to use them independently
   raw_data <- readLines(file, warn = FALSE )
@@ -36,6 +34,52 @@ read_alignment <- function(file){
     stop("Your provided file is not an alignment. Please provide an alignment file in FASTA format to use alignfigR.")
   # Instead return as a tibble
   tibble::as_tibble(seq_list) 
+}
+
+position_alignment <- function(file) {
+  # readLines appears to separate lines so there's a away to use them independently
+  raw_data <- readLines(file, warn = FALSE )
+  # Makes an empty array
+  seq_vector <- c()
+  # Makes an empty character string
+  seq_name <- ""
+  # All about getting the organism identifiers in a vector
+  for (line in raw_data){
+    # If the lines begins with a ">"
+    if (grepl("^>", line)) {
+      # Then the entire line (surrounded in "") is set  equal to seq_name)
+      seq_name <- sub("^>", "", line)
+      # Makes an empty vector of the organism identifiers
+      seq_vector[seq_name] <- ""
+    }
+    # For actual sequence not identifiers
+    else {
+      temp_seq <- gsub(" ","",line)
+      temp_seq <- gsub("\n","",temp_seq)
+      seq_vector[seq_name] <- paste(seq_vector[seq_name], temp_seq, sep="" )
+    }
+  }
+  # Is this an alignment?
+  # Separates the string of proteins by "", allowing the number to be counted
+  seq_list <- strsplit(seq_vector, split = "")
+  lengths <- sapply(seq_list, length)
+  # Check to make sure all alignments have the same number of proteins
+  if ( sum(lengths != lengths[1]) != 0 )
+    stop("Your provided file is not an alignment. Please provide an alignment file in FASTA format to use alignfigR.")
+  # Instead return as a tibble
+  tibble::as_tibble(seq_list) -> new_data
+  new_data %>%
+    mutate(position = 1:nrow(new_data)) %>%
+    select(position, everything())
+}
+
+position_find <- function(file, ID = c(), pos1, pos2) {
+  position_alignment(file) -> new_data
+  x <- ID
+  range <- pos1:pos2
+  new_data %>%
+    select(position, x) %>%
+    filter(position %in% range)
 }
 
 extract_subalign <- function(seq_list, plot_step = 1, tlist = c(), clist = c(), texcl = FALSE, cexcl = FALSE, cincl = FALSE)
@@ -112,8 +156,9 @@ define_palette <- function(typemsa, uniques = NA, custom_colors = NA){
   palette
 }
 
-plot_alignment <- function(seq_list, taxa = c(), plot_step = 1, taxon_labels = FALSE, columns = c(), exclude_taxa = FALSE, exclude_columns = FALSE, include_columns = FALSE, legend_title = "Character", graph_title = "Character", typemsa, custom_colors = NA)
+plot_alignment <- function(file, taxa = c(), plot_step = 1, taxon_labels = FALSE, columns = c(), exclude_taxa = FALSE, exclude_columns = FALSE, include_columns = FALSE, legend_title = "Character", graph_title = "Character", typemsa, custom_colors = NA)
 {
+  seq_list <- read_alignment(file)
   # Extract desired alignment subset
   plot_frame <- extract_subalign(seq_list, plot_step, taxa, columns, exclude_taxa, exclude_columns, include_columns)
   
@@ -141,8 +186,10 @@ plot_alignment <- function(seq_list, taxa = c(), plot_step = 1, taxon_labels = F
   }
   p
 }
-read_alignment("~/Desktop/alignfigR/read_alignment/protein.fasta") -> protein_seqs
-plot_alignment(protein_seqs, typemsa = "free", legend_title = "New Legend", taxon_labels = TRUE, graph_title = "New Graph")
+
+plot_alignment("~/Desktop/alignfigR/read_alignment/protein.fasta", typemsa = "free", legend_title = "New Legend", taxon_labels = TRUE, graph_title = "New Graph")
+
+position_find("~/Desktop/alignfigR/read_alignment/protein.fasta", ID = c("C9EABACTA301505","C9CABACTO298505"), pos1 = 16, pos2 = 25)
 
 
 
