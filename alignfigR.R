@@ -156,6 +156,37 @@ define_palette <- function(typemsa, uniques = NA, custom_colors = NA){
   palette
 }
 
+pos_percent <- function(file, position) {
+  position_alignment(file) -> new_data
+  position -> x
+  r <- 1
+  n <- 0
+  new_data %>%
+    filter(position == x) %>%
+    select(!position) -> a
+  unlist(a) -> a
+  unname(a) -> a
+  unique(a) -> uniques
+  length(uniques) + 1 -> q
+  length(a) -> l
+  answer <- c()
+  while (r < q) {
+    for (i in a) {
+      if (i == uniques[r]) {
+        n + 1 -> n
+      } else {
+        n + 0 -> n 
+      }
+    }
+    n / l -> percent
+    name <- uniques[r]
+    answer[name] <- paste(answer[name], percent, sep = "")
+    n <- 0
+    r <- r + 1 
+  } 
+  return(answer)
+}
+
 plot_alignment <- function(file, taxa = c(), plot_step = 1, taxon_labels = FALSE, columns = c(), exclude_taxa = FALSE, exclude_columns = FALSE, include_columns = FALSE, legend_title = "Character", graph_title = "Character", typemsa, custom_colors = NA)
 {
   seq_list <- read_alignment(file)
@@ -190,6 +221,8 @@ plot_alignment <- function(file, taxa = c(), plot_step = 1, taxon_labels = FALSE
 plot_alignment("~/Desktop/alignfigR/read_alignment/protein.fasta", typemsa = "free", legend_title = "New Legend", taxon_labels = TRUE, graph_title = "New Graph")
 
 position_find("~/Desktop/alignfigR/read_alignment/protein.fasta", ID = c("C9EABACTA301505","C9CABACTO298505"), pos1 = 16, pos2 = 25)
+
+pos_percent("~/Desktop/alignfigR/read_alignment/protein.fasta", 15) 
 
 
 
