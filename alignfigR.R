@@ -90,18 +90,31 @@ d
 unique(d$seq) -> define_palette_test
 
 define_palette <- function(typemsa, uniques = NA, custom_colors = NA){
+  # if typemsa is equal to random
   if (tolower(typemsa) == "random") {
+    # set subcolors equal to all colors except the null color
     subcolors <- colors()[colors() != null_color]
+    # set palette equal to a sampling of subcolors, the same number as uniques
     palette <- sample(subcolors, length(uniques))
+    # sets names of palette equal to uniques
     names(palette) <- uniques
-  } else if (tolower(typemsa) == "dna" || tolower(typemsa) == "rna"){
+  } # if typemsa is 'dna' or 'rna'
+  else if (tolower(typemsa) == "dna" || tolower(typemsa) == "rna"){
+    # set bases equal to ACGTU
     bases <- c("A", "C", "G", "T", "U")
+    # set palette as a set of 5 colors (two the same for T and U)
     palette <- c("mediumblue", "orangered1", "limegreen", "khaki1", "khaki1")
+    # sets names of palette equal to bases
     names(palette) <- bases  
-  } else if (tolower(typemsa) == "custom") {
+  } # if typemsa is equal to 'custom'
+  else if (tolower(typemsa) == "custom") {
+    # sets palette equal to custom colors
     palette <- custom_colors
+    # assigns uniques as the names of the palette
     names(palette) <- uniques
-  } else if (tolower(typemsa) == "free") {
+  } # if typemsa is equal to 'free'
+  else if (tolower(typemsa) == "free") {
+    # Sets palette as a defined color for each protein/nucleotide
     palette <- c("A" = "limegreen", "G" = "lightgreen",
                  "C" = "hotpink1", "T" = "red", 
                  "U" = "lightsalmon", "J" = "maroon",
@@ -117,33 +130,48 @@ define_palette <- function(typemsa, uniques = NA, custom_colors = NA){
                  "P" = "salmon", "-" = null_color,
                  "S" = "darkred", "X" = "black") 
   }
+  # returns palette
   palette
 }
 
 #------------------------------------------------------------------------------------------------------------
 
 plot_alignment <- function(alignment, tlist = c(), texcl = FALSE, typemsa, uniques = NA, custom_colors = NA, taxon_labels = FALSE, graph_title = NA, legend_title = NA) {
+  # runs extract_subalign_improved and defines it as plot_frame
   extract_subalign_improved(alignment, tlist, texcl) -> plot_frame
+  # defines uniques as the uniques of the sequence in plot_frame
   unique(plot_frame$seq) -> uniques
+  # runs define palette and sets it's output as pal
   define_palette(typemsa, uniques, custom_colors) -> pal
+  # if taxon_labels is equal to FALSE
   if (taxon_labels == FALSE){
-    p <- ggplot() +
+    # defines plot as
+    plot <- ggplot() +
+      # geom_rect() using plot_frame from extract_subalign()
       geom_rect(plot_frame, mapping=aes(xmin=x1-1, xmax=x2-1, ymin=
-                                          y1-1, ymax=y2-1, fill = seq), linetype=0) +       
+                                  y1-1, ymax=y2-1, fill = seq), linetype=0) +       
+      # sets the custom color palette as pal and the name of the legend
       scale_fill_manual(values=pal, 
                         name = legend_title) +
+      # sets the graph title as graph_title
       labs(title = graph_title)
-  }
+  } # if taxon_labels is equal to TRUE
   else {
-    p <- ggplot() + 
+    # defines plot as
+    plot <- ggplot() + 
+      # geom_rect() being run on plot_frame from extract_subalign()
       geom_rect(plot_frame, mapping=aes(xmin=x1, xmax=x2, ymin =
                                           y1, ymax=y2, fill = seq), linetype=0) +
+      # defines the graph title as graph_title
       labs(title = graph_title) +
+      # defiens the custom color palette and names the legend title as legend_title
       scale_fill_manual(values=pal, 
                         name = legend_title) +
+      # places the taxon identifiers and column along the y axis
       scale_y_discrete(limits = names(alignment))
   }
-  p
+  # returns the plot
+  plot
 }
 plot_alignment(tibble_fasta, typemsa = "free", taxon_labels = TRUE, graph_title = "Graph", legend_title = "legend")  
   
