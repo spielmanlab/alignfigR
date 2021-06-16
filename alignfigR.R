@@ -43,7 +43,7 @@ read_alignment("data/protein.fasta") -> tibble_fasta
 
 #--------------------------------------------------------------------------------------------------------
 
-extract_subalign_improved <- function(alignment, tlist = c(), texcl = FALSE) {
+extract_subalign_improved <- function(alignment, tlist = c(), texcl = FALSE, clist = c(), cexcl = FALSE) {
   # If tlist is empty, then alignment = data
   if (length(tlist) == 0){
     alignment -> data
@@ -82,7 +82,23 @@ extract_subalign_improved <- function(alignment, tlist = c(), texcl = FALSE) {
                   y1 = c(t(replicate(length_of_taxa, 
                                      1:(number_of_rows/length_of_taxa)))), 
                   # Creates a new column where y2 is 1 greater than y1
-                  y2 = y1 + 1)
+                  y2 = y1 + 1) -> data_rect
+  if (length(clist)== 0){
+    data_rect -> d
+  } else {
+    data_rect %>%
+      dplyr::mutate(column = rep(1:length_of_taxa, number_of_rows/length_of_taxa)) -> data_column_ready
+    if (cexcl) {
+      data_column_ready %>%
+        dplyr::filter(!column %in% clist) %>%
+        dplyr::select(-column) -> d
+    } else {
+      data_column_ready %>%
+        dplyr::filter(column %in% clist) %>%
+        dplyr::select(-column) -> d
+    }
+  }
+  d
 }
 
 #-------------------------------------------------------------------------------------------------------------
@@ -202,9 +218,9 @@ define_palette <- function(typemsa, uniques = NA, custom_colors = NA){
 
 #------------------------------------------------------------------------------------------------------------
 
-plot_alignment <- function(alignment, tlist = c(), texcl = FALSE, typemsa, uniques = NA, custom_colors = NA, taxon_labels = FALSE, graph_title = NA, legend_title = NA) {
+plot_alignment <- function(alignment, tlist = c(), texcl = FALSE, clist = c(), cexcl = FALSE, typemsa, uniques = NA, custom_colors = NA, taxon_labels = FALSE, graph_title = NA, legend_title = NA) {
   # runs extract_subalign_improved and defines it as plot_frame
-  extract_subalign_improved(alignment, tlist, texcl) -> plot_frame
+  extract_subalign_improved(alignment, tlist, texcl, clist, cexcl) -> plot_frame
   # defines uniques as the uniques of the sequence in plot_frame
   unique(plot_frame$seq) -> uniques
   # runs define palette and sets it's output as pal
@@ -239,7 +255,7 @@ plot_alignment <- function(alignment, tlist = c(), texcl = FALSE, typemsa, uniqu
   # returns the plot
   plot
 }
-plot_alignment(tibble_fasta, typemsa = "floral", taxon_labels = TRUE, graph_title = "Graph", legend_title = "legend")  
+plot_alignment(tibble_fasta, typemsa = "Ocean", taxon_labels = TRUE, graph_title = "Graph", legend_title = "legend", clist = 1:25)  
   
   
 #------------------------------------------------------------------------------------------------------------
