@@ -2,7 +2,12 @@ library(tidyverse)
 null_color <- "grey85"
 ZERO <- 1e-12 # effectively zero
 #----------------------------------------------------------------------------------------------------------
-
+#' Transforms fatsa into a tibble 
+#'
+#' @param file The fatsa 
+#' @return Returns a tibble of the fatsa data
+#' @examples 
+#' read_alignment("data/protein.fasta") -> tibble_fasta
 read_alignment <- function(file) {
   # readLines appears to separate lines so there's a away to use them independently
   raw_data <- readLines(file, warn = FALSE )
@@ -43,7 +48,16 @@ read_alignment("data/protein.fasta") -> tibble_fasta
 
 #--------------------------------------------------------------------------------------------------------
 
-extract_subalign_improved <- function(alignment, tlist = c(), texcl = FALSE, clist = c(), cexcl = FALSE) {
+#' Gives the ability to select which taxa and columns you want portrayed in the plot 
+#'
+#' @param alignment The tibble from read_alignment() 
+#' @param tlist A string of the taxa you wish to include or exclude
+#' @param texcl Determinant if you want to include only the taxa in tlist, or exclude only the tlist
+#' @param clist The columns you wish to have portrayed in the plot
+#' @param cexcl Determinant if you want to include only the columns in clist, or exclude only the clist
+#' @return Returns a tibble which contains the preferred taxa and columns, and is prepped for geom_rect()
+
+extract_subalign <- function(alignment, tlist = c(), texcl = FALSE, clist = c(), cexcl = FALSE) {
   # If tlist is empty, then alignment = data
   if (length(tlist) == 0){
     alignment -> data
@@ -102,6 +116,13 @@ extract_subalign_improved <- function(alignment, tlist = c(), texcl = FALSE, cli
 }
 
 #-------------------------------------------------------------------------------------------------------------
+
+#' Assigns the color palette for plot_alignment(), and allows you to select a custom palette 
+#'
+#' @param typemsa The palette you wish to use. Options are "random", "dna", "rna", "custom", "free", "ocean", "fire", "forest" and "floral". 
+#' @param uniques The protein/nucleotide identifiers used in your data
+#' @param custom_colors A string of the colors you wish to have in the palette that contains the same amount of colors as unique protein/nucleotide identifiers you have in your data. The first identifier in uniques will be assigned the first color in custom_colors and so on.
+#' @return Returns a color palette
 
 define_palette <- function(typemsa, uniques = NA, custom_colors = NA){
     # if typemsa is equal to random
@@ -218,9 +239,26 @@ define_palette <- function(typemsa, uniques = NA, custom_colors = NA){
 
 #------------------------------------------------------------------------------------------------------------
 
+#' Assigns the color palette for plot_alignment(), and allows you to select a custom palette 
+#'
+#' @param alignment The tibble from read_alignment()
+#' @param tlist A string of the taxa you wish to include or exclude
+#' @param texcl Determinant if you want to include only the taxa in tlist, or exclude only the tlist
+#' @param clist The columns you wish to have portrayed in the plot
+#' @param cexcl Determinant if you want to include only the columns in clist, or exclude only the clist
+#' @param typemsa The palette you wish to use. Options are "random", "dna", "rna", "custom", "free", "ocean", "fire", "forest" and "floral".
+#' @param uniques The protein/nucleotide identifiers used in your data
+#' @param custom_colors A string of the colors you wish to have in the palette that contains the same amount of colors as unique protein/nucleotide identifiers you have in your data. The first identifier in uniques will be assigned the first color in custom_colors and so on.
+#' @param taxon_labels Determinant of if taxa identifiers will be present on the graph or not
+#' @param graph_title Sets the graph title
+#' @param legend_title Sets the legend title
+#' @return Returns an MSA of the data
+#' @examples 
+#' plot_alignment(tibble_fasta, typemsa = "Ocean", taxon_labels = TRUE, graph_title = "Graph", legend_title = "legend")   
+
 plot_alignment <- function(alignment, tlist = c(), texcl = FALSE, clist = c(), cexcl = FALSE, typemsa, uniques = NA, custom_colors = NA, taxon_labels = FALSE, graph_title = NA, legend_title = NA) {
   # runs extract_subalign_improved and defines it as plot_frame
-  extract_subalign_improved(alignment, tlist, texcl, clist, cexcl) -> plot_frame
+  extract_subalign(alignment, tlist, texcl, clist, cexcl) -> plot_frame
   # defines uniques as the uniques of the sequence in plot_frame
   unique(plot_frame$seq) -> uniques
   # runs define palette and sets it's output as pal
@@ -255,7 +293,7 @@ plot_alignment <- function(alignment, tlist = c(), texcl = FALSE, clist = c(), c
   # returns the plot
   plot
 }
-plot_alignment(tibble_fasta, typemsa = "Ocean", taxon_labels = TRUE, graph_title = "Graph", legend_title = "legend", clist = 1:25)  
+plot_alignment(tibble_fasta, typemsa = "Ocean", taxon_labels = TRUE, graph_title = "Graph", legend_title = "legend")  
   
   
 #------------------------------------------------------------------------------------------------------------
