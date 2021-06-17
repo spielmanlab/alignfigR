@@ -271,7 +271,6 @@ plot_alignment <- function(alignment, tlist = c(), texcl = FALSE, clist = c(), c
 }
 plot_alignment(tibble_fasta, typemsa = "Ocean", taxon_labels = TRUE, graph_title = "Graph", legend_title = "legend")  
   
-  
 #------------------------------------------------------------------------------------------------------------
 
 #' Reveals the unique protein/nucleotide identifiers found in this column, reveals the counts and the frequency of organisms having that identifier in that column
@@ -309,13 +308,3 @@ calculate_column_percentage <- function(alignment_tibble, column_of_interest) {
   column_percentages
 }
  calculate_column_percentage(tibble_fasta, 5)
-
-
-
-
-
-
-
-
-
-
