@@ -297,6 +297,15 @@ plot_alignment(tibble_fasta, typemsa = "Ocean", taxon_labels = TRUE, graph_title
   
   
 #------------------------------------------------------------------------------------------------------------
+
+#' Reveals the unique protein/nucleotide identifiers found in this column, reveals the counts and the frequency of organisms having that identifier in that column
+#'
+#' @param alignment_tibble The tibble from read_alignment()
+#' @param column_of_interest The specific column you want to see
+#' @return Returns a tibble with rows 'value', 'count' and 'percent'
+#' @example 
+#' calculate_column_percentage(tibble_fasta, 5)
+
 calculate_column_percentage <- function(alignment_tibble, column_of_interest) {
   
   # Determine percent of characters per column
