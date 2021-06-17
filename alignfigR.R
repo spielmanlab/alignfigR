@@ -2,7 +2,7 @@ library(tidyverse)
 null_color <- "grey85"
 ZERO <- 1e-12 # effectively zero
 #----------------------------------------------------------------------------------------------------------
-#' Transforms fatsa into a tibble 
+#' Transforms fasta into a tibble 
 #'
 #' @param file The fatsa 
 #' @return Returns a tibble of the fatsa data
@@ -97,18 +97,28 @@ extract_subalign <- function(alignment, tlist = c(), texcl = FALSE, clist = c(),
                                      1:(number_of_rows/length_of_taxa)))), 
                   # Creates a new column where y2 is 1 greater than y1
                   y2 = y1 + 1) -> data_rect
+  # if clist is empty
   if (length(clist)== 0){
+    # data_rect is equal to d
     data_rect -> d
+  # if clist is not empty
   } else {
+    # replaces 'column' column so it can be used to filter the data
     data_rect %>%
       dplyr::mutate(column = rep(1:length_of_taxa, number_of_rows/length_of_taxa)) -> data_column_ready
+    # if cexcl is true
     if (cexcl) {
+      # filters the data for all columns that are not mentioned in clist
       data_column_ready %>%
         dplyr::filter(!column %in% clist) %>%
+        # removes column and sets it equal to d
         dplyr::select(-column) -> d
+      # if cexcl is false
     } else {
+      # filters the data for all columns that are mentioned in clist
       data_column_ready %>%
         dplyr::filter(column %in% clist) %>%
+        # removes column and sets it equal to d
         dplyr::select(-column) -> d
     }
   }
