@@ -1,7 +1,5 @@
-library(tidyverse)
-null_color <- "grey85"
-ZERO <- 1e-12 # effectively zero
-#----------------------------------------------------------------------------------------------------------
+source("utils.R")
+library("magrittr")
 #' Transforms fasta into a tibble 
 #'
 #' @param file The fatsa 
@@ -40,9 +38,6 @@ read_alignment <- function(file) {
     dplyr::mutate(column = 1:nrow(new_data)) %>%
     dplyr::select(column, dplyr::everything())
 }
-read_alignment("data/protein.fasta") -> tibble_fasta
-
-#--------------------------------------------------------------------------------------------------------
 
 #' Gives the ability to select which taxa and columns you want portrayed in the plot 
 #'
@@ -66,18 +61,16 @@ extract_subalign <- function(alignment, tlist = c(), texcl = FALSE, clist = c(),
   } 
   data %>%
     dplyr::select(-column) %>%
-    # Pivots data longer, selects all columns
+    # Pivots data longer
     tidyr::pivot_longer(cols = everything(), 
-                        # Moves columns to 'Taxa'
                         names_to = "Taxa", 
-                        # Moves values to 'seq' and sets it equal to data_longer
                         values_to = "seq") -> data_longer
   # Reorders the taxa to be alphabetical
   data_longer[order(data_longer$Taxa),] -> data_alphabetical
   # Counts the number of rows and saves it to number_of_rows
-  as.integer(count(data_alphabetical)) -> number_of_rows 
+  as.integer(dplyr::count(data_alphabetical)) -> number_of_rows 
   # Determines the length of each individual taxon
-  number_of_rows/as.integer(count(unique(data_alphabetical[1]))) -> length_of_taxa
+  number_of_rows/as.integer(dplyr::count(unique(data_alphabetical[1]))) -> length_of_taxa
   data_alphabetical %>%
     # Creates a new column where is it repeating 1:length_of_taxa until it reaches the end
     dplyr::mutate(x1 = rep(1:length_of_taxa, number_of_rows/length_of_taxa), 
@@ -111,8 +104,6 @@ extract_subalign <- function(alignment, tlist = c(), texcl = FALSE, clist = c(),
   d
 }
 
-#-------------------------------------------------------------------------------------------------------------
-
 #' Assigns the color palette for plot_alignment(), and allows you to select a custom palette 
 #'
 #' @param typemsa The palette you wish to use. Options are "random", "dna", "rna", "custom", "free", "ocean", "fire", "forest" and "floral". 
@@ -128,10 +119,9 @@ define_palette <- function(typemsa, uniques = NA, custom_colors = NA){
                       length(uniques))
     names(palette) <- uniques
   } else if (tolower(typemsa) == "dna" || tolower(typemsa) == "rna"){
-    bases <- c("A", "C", "G", "T", "U")
-    palette <- c("mediumblue", "orangered1", "limegreen", "khaki1", "khaki1")
+    palette <- nucleotide_pal
     # Names of the palette are defined as the bases
-    names(palette) <- bases  
+    names(palette) <- nucleotides  
   } else if (tolower(typemsa) == "custom") {
     # palette is defined as custom_colors
     palette <- custom_colors
@@ -139,89 +129,22 @@ define_palette <- function(typemsa, uniques = NA, custom_colors = NA){
     names(palette) <- uniques
   } else if (tolower(typemsa) == "free") {
     # the palette is defined below
-    palette <- c("A" = "limegreen", "G" = "lightgreen",
-                 "C" = "hotpink1", "T" = "red", 
-                 "U" = "lightsalmon", "J" = "maroon",
-                 "B" = "snow", "O" = "mediumorchid",
-                 "D" = "lemonchiffon", "E" = "lightseagreen", 
-                 "N" = "darkgreen", "Q" = "thistle",
-                 "I" = "lightblue1", "L" = "lightcyan", 
-                 "M" = "violet", "V" = "powderblue",
-                 "F" = "lavender", "W" = "lightcoral", 
-                 "Y" = "plum", "V" = "moccasin",
-                 "H" = "navy", "Z" = "tan",
-                 "K" = "orange", "R" = "lightgoldenrod",
-                 "P" = "salmon", "-" = null_color,
-                 "S" = "darkred", "X" = "black") 
+    palette <- free_pal
   } else if (tolower(typemsa) == "ocean") {
     # the palette is defined below
-    palette <- c("A" = "turquoise", "G" = "lightgreen",
-                 "C" = "turquoise4", "T" = "tan4", 
-                 "U" = "steelblue", "J" = "springgreen4",
-                 "B" = "seashell", "O" = "seashell4",
-                 "D" = "seagreen", "E" = "lightseagreen", 
-                 "N" = "skyblue", "Q" = "skyblue4",
-                 "I" = "lightblue1", "L" = "lightcyan", 
-                 "M" = "midnightblue", "V" = "powderblue",
-                 "F" = "blue", "W" = "dodgerblue", 
-                 "Y" = "navajowhite", "V" = "moccasin",
-                 "H" = "navy", "Z" = "tan",
-                 "K" = "lavenderblush2", "R" = "lightgoldenrod",
-                 "P" = "deepskyblue4", "-" = null_color,
-                 "S" = "honeydew3", "X" = "aquamarine2") 
+    palette <- ocean_pal 
   } else if (tolower(typemsa) == "forest") {
     # the palette is defined below
-    palette <- c("A" = "wheat4", "G" = "darkgreen",
-                 "C" = "saddlebrown", "T" = "tan4", 
-                 "U" = "brown4", "J" = "springgreen4",
-                 "B" = "black", "O" = "goldenrod4",
-                 "D" = "seagreen", "E" = "chocolate4", 
-                 "N" = "darkseagreen", "Q" = "bisque4",
-                 "I" = "burlywood4", "L" = "peru", 
-                 "M" = "forestgreen", "V" = "rosybrown4",
-                 "F" = "olivedrab4", "W" = "green4", 
-                 "Y" = "navajowhite4", "V" = "moccasin",
-                 "H" = "khaki4", "Z" = "tan",
-                 "K" = "sienna4", "R" = "beige",
-                 "P" = "gray20", "-" = null_color,
-                 "S" = "darkseagreen4", "X" = "peachpuff4") 
+    palette <- forest_pal
   } else if (tolower(typemsa) == "fire") {
     # the palette is defined below
-    palette <- c("A" = "tomato", "G" = "orange",
-                 "C" = "yellow", "T" = "red", 
-                 "U" = "brown", "J" = "tan",
-                 "B" = "saddlebrown", "O" = "goldenrod",
-                 "D" = "salmon", "E" = "chocolate", 
-                 "N" = "gray45", "Q" = "paleturquoise",
-                 "I" = "burlywood4", "L" = "peru", 
-                 "M" = "firebrick4", "V" = "sienna4",
-                 "F" = "sandybrown", "W" = "gray20", 
-                 "Y" = "red4", "V" = "indianred",
-                 "H" = "khaki", "Z" = "moccasin",
-                 "K" = "sienna", "R" = "blanchedalmond",
-                 "P" = "lightgoldenrod", "-" = null_color,
-                 "S" = "wheat", "X" = "black")
+    palette <- fire_pal
   } else if (tolower(typemsa) == "floral") {
     # the palette is defined below
-    palette <- c("A" = "chartreuse2", "G" = "orange",
-                 "C" = "yellow", "T" = "red", 
-                 "U" = "pink", "J" = "dodgerblue",
-                 "B" = "plum", "O" = "thistle",
-                 "D" = "salmon", "E" = "darkblue", 
-                 "N" = "violet", "Q" = "paleturquoise",
-                 "I" = "steelblue", "L" = "peru", 
-                 "M" = "purple", "V" = "purple4",
-                 "F" = "palevioletred", "W" = "midnightblue", 
-                 "Y" = "palegreen", "V" = "white",
-                 "H" = "lavender", "Z" = "honeydew2",
-                 "K" = "darkorange3", "R" = "aquamarine",
-                 "P" = "mistyrose3", "-" = null_color,
-                 "S" = "wheat", "X" = "black")
+    palette <- floral_pal
   }
   palette
 }
-
-#------------------------------------------------------------------------------------------------------------
 
 #' Assigns the color palette for plot_alignment(), and allows you to select a custom palette 
 #'
@@ -247,31 +170,28 @@ plot_alignment <- function(alignment, tlist = c(), texcl = FALSE, clist = c(), c
   # runs define palette and sets it's output as pal
   define_palette(typemsa, uniques, custom_colors) -> pal
   if (taxon_labels == FALSE){
-    plot <- ggplot() +
+    plot <- ggplot2::ggplot() +
       # geom_rect() using plot_frame from extract_subalign()
-      geom_rect(plot_frame, mapping=aes(xmin=x1-1, xmax=x2-1, ymin=
+      geom_rect(plot_frame, mapping= ggplot2::aes(xmin=x1-1, xmax=x2-1, ymin=
                                   y1-1, ymax=y2-1, fill = seq), linetype=0) +       
       # sets the custom color palette 
       scale_fill_manual(values=pal, 
                         name = legend_title) +
       labs(title = graph_title)
   } else {
-    plot <- ggplot() + 
+    plot <- ggplot2::ggplot() + 
       # geom_rect() being run on plot_frame from extract_subalign()
-      geom_rect(plot_frame, mapping=aes(xmin=x1, xmax=x2, ymin =
+      ggplot2::geom_rect(plot_frame, mapping= ggplot2::aes(xmin=x1, xmax=x2, ymin =
                                           y1, ymax=y2, fill = seq), linetype=0) +
-      labs(title = graph_title) +
+      ggplot2::labs(title = graph_title) +
       # defines custom color palette and legend title 
-      scale_fill_manual(values=pal, 
+      ggplot2::scale_fill_manual(values=pal, 
                         name = legend_title) +
       # places the taxon identifiers and column along the y axis
-      scale_y_discrete(limits = names(alignment))
+      ggplot2::scale_y_discrete(limits = names(alignment))
   }
   plot
 }
-plot_alignment(tibble_fasta, typemsa = "Ocean", taxon_labels = TRUE, graph_title = "Graph", legend_title = "legend")  
-  
-#------------------------------------------------------------------------------------------------------------
 
 #' Reveals the unique protein/nucleotide identifiers found in this column, reveals the counts and the frequency of organisms having that identifier in that column
 #'
@@ -307,4 +227,3 @@ calculate_column_percentage <- function(alignment_tibble, column_of_interest) {
   # Give back the tibble with three columns: value, count, and percent
   column_percentages
 }
- calculate_column_percentage(tibble_fasta, 5)
