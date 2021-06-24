@@ -10,7 +10,7 @@ Authors@R:
       person(given = "Richard",
              family = "Demko",
              role = "aut"))
-Description: Given a file of FASTA sequences, makes a figure.
+Description: Given a file of FASTA sequences, makes a figure using ggplot2.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
