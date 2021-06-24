@@ -1,6 +1,6 @@
 Package: alignfigR
 Type: Package
-Title: Create Figures of Multiple Sequence Alignments
+Title: Create Figures of Multiple Sequence Alignments from Fasta Files
 Version: 0.1.0
 Authors@R: 
     c(person(given = "Stephanie",
