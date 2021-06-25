@@ -7,10 +7,10 @@
 read_alignment(file)
 }
 \arguments{
-\item{file}{The fatsa}
+\item{file}{The fasta}
 }
 \value{
-Returns a tibble of the fatsa data
+Returns a tibble of the fasta data
 }
 \description{
 Transforms fasta into a tibble
