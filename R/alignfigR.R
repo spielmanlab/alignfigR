@@ -191,8 +191,8 @@ plot_alignment <- function(alignment,
                            uniques = NA, 
                            custom_colors = NA, 
                            taxon_labels = FALSE, 
-                           graph_title = NA, 
-                           legend_title = NA) {
+                           graph_title = "Graph Title", 
+                           legend_title = "Legend") {
   # runs extract_subalign and defines it as plot_frame
   extract_subalign(alignment, 
                    tlist, 

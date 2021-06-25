@@ -14,8 +14,8 @@ plot_alignment(
   uniques = NA,
   custom_colors = NA,
   taxon_labels = FALSE,
-  graph_title = NA,
-  legend_title = NA
+  graph_title = "Graph Title",
+  legend_title = "Legend"
 )
 }
 \arguments{
