@@ -20,11 +20,12 @@ null_color <- "grey85"
 #' @noRd
 ZERO <- 1e-12
 
-#' Nucleotides
-nucleotides <- c("A", "C", "G", "T", "U")
-
 #' Needs a thing
-nucleotide_pal <- c("mediumblue", "orangered1", "limegreen", "khaki1", "khaki1")
+nucleotide_pal <- c("A"= "mediumblue", 
+                    "G"="orangered1",
+                    "C"= "limegreen", 
+                    "T"= "khaki1", 
+                    "U"= "khaki1")
 
 free_pal <- c("A" = "limegreen", "G" = "lightgreen",
               "C" = "hotpink1", "T" = "red",
