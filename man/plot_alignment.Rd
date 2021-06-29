@@ -10,7 +10,7 @@ plot_alignment(
   texcl = FALSE,
   clist = c(),
   cexcl = FALSE,
-  typemsa,
+  palette_msa,
   uniques = NA,
   custom_colors = NA,
   taxon_labels = FALSE,
@@ -29,7 +29,7 @@ plot_alignment(
 
 \item{cexcl}{Determinant if you want to include only the columns in clist, or exclude only the clist}
 
-\item{typemsa}{The palette you wish to use. Options are "random", "dna", "rna", "custom", "free", "ocean", "fire", "forest" and "floral".}
+\item{palette_msa}{The palette you wish to use. Options are "random", "dna", "rna", "custom", "free", "ocean", "fire", "forest" and "floral".}
 
 \item{uniques}{The protein/nucleotide identifiers used in your data}
 
