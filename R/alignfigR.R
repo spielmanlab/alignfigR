@@ -120,7 +120,7 @@ extract_subalign <- function(alignment,
 
 #' Assigns the color palette for plot_alignment(), and allows you to select a custom palette
 #'
-#' @param typemsa The palette you wish to use. Options are "random", "dna", "rna", "custom", "free", "ocean", "fire", "forest" and "floral".
+#' @param palette_msa The palette you wish to use. Options are "random", "dna", "rna", "custom", "free", "ocean", "fire", "forest" and "floral".
 #' @param uniques The protein/nucleotide identifiers used in your data
 #' @param custom_colors A string of the colors you wish to have in the palette that contains the same amount of colors as unique protein/nucleotide identifiers you have in your data. The first identifier in uniques will be assigned the first color in custom_colors and so on.
 #' @return Returns a color palette
