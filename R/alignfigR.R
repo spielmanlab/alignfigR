@@ -124,10 +124,10 @@ extract_subalign <- function(alignment,
 #' @param uniques The protein/nucleotide identifiers used in your data
 #' @param custom_colors A string of the colors you wish to have in the palette that contains the same amount of colors as unique protein/nucleotide identifiers you have in your data. The first identifier in uniques will be assigned the first color in custom_colors and so on.
 #' @return Returns a color palette
-define_palette <- function(typemsa, 
+define_palette <- function(palette_msa, 
                            uniques = NA, 
                            custom_colors = NA){
-  if (tolower(typemsa) == "random") {
+  if (tolower(palette_msa) == "random") {
     # subcolors is equal to colors without null_color
     subcolors <- grDevices::colors()[grDevices::colors() != null_color]
     # palette is equal to a random sampling of subcolors, the same length as uniques
@@ -135,27 +135,27 @@ define_palette <- function(typemsa,
                       length(uniques))
     names(palette) <- uniques
     return(palette)
-  } else if (tolower(typemsa) == "dna" || tolower(typemsa) == "rna"){
+  } else if (tolower(palette_msa) == "dna" || tolower(palette_msa) == "rna"){
     return(nucleotide_pal)
-  } else if (tolower(typemsa) == "custom") {
+  } else if (tolower(palette_msa) == "custom") {
     # palette is defined as custom_colors
     palette <- custom_colors
     # names of the palette are defined as the bases
     names(palette) <- uniques
     return(palette)
-  } else if (tolower(typemsa) == "free") {
+  } else if (tolower(palette_msa) == "basic") {
     # the palette is defined below
-    return(free_pal)
-  } else if (tolower(typemsa) == "ocean") {
+    return(basic_pal)
+  } else if (tolower(palette_msa) == "ocean") {
     # the palette is defined below
     return(ocean_pal)
-  } else if (tolower(typemsa) == "forest") {
+  } else if (tolower(palette_msa) == "forest") {
     # the palette is defined below
     return(forest_pal)
-  } else if (tolower(typemsa) == "fire") {
+  } else if (tolower(palette_msa) == "fire") {
     # the palette is defined below
     return(fire_pal)
-  } else if (tolower(typemsa) == "floral") {
+  } else if (tolower(palette_msa) == "floral") {
     # the palette is defined below
     return(floral_pal)
   } else {
@@ -175,7 +175,7 @@ define_palette <- function(typemsa,
 #' @param texcl Determinant if you want to include only the taxa in tlist, or exclude only the tlist
 #' @param clist The columns you wish to have portrayed in the plot
 #' @param cexcl Determinant if you want to include only the columns in clist, or exclude only the clist
-#' @param typemsa The palette you wish to use. Options are "random", "dna", "rna", "custom", "free", "ocean", "fire", "forest" and "floral".
+#' @param palette_msa The palette you wish to use. Options are "random", "dna", "rna", "custom", "free", "ocean", "fire", "forest" and "floral".
 #' @param uniques The protein/nucleotide identifiers used in your data
 #' @param custom_colors A string of the colors you wish to have in the palette that contains the same amount of colors as unique protein/nucleotide identifiers you have in your data. The first identifier in uniques will be assigned the first color in custom_colors and so on.
 #' @param taxon_labels Determinant of if taxa identifiers will be present on the graph or not
@@ -187,7 +187,7 @@ plot_alignment <- function(alignment,
                            texcl = FALSE, 
                            clist = c(), 
                            cexcl = FALSE, 
-                           typemsa, 
+                           palette_msa, 
                            uniques = NA, 
                            custom_colors = NA, 
                            taxon_labels = FALSE, 
@@ -202,7 +202,7 @@ plot_alignment <- function(alignment,
   # defines uniques as the uniques of the sequence in plot_frame
   unique(plot_frame$seq) -> uniques
   # runs define palette and sets it's output as pal
-  define_palette(typemsa, 
+  define_palette(palette_msa, 
                  uniques, 
                  custom_colors) -> pal
   if (taxon_labels == FALSE){
