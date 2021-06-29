@@ -4,14 +4,14 @@
 \alias{define_palette}
 \title{Assigns the color palette for plot_alignment(), and allows you to select a custom palette}
 \usage{
-define_palette(typemsa, uniques = NA, custom_colors = NA)
+define_palette(palette_msa, uniques = NA, custom_colors = NA)
 }
 \arguments{
-\item{typemsa}{The palette you wish to use. Options are "random", "dna", "rna", "custom", "free", "ocean", "fire", "forest" and "floral".}
-
 \item{uniques}{The protein/nucleotide identifiers used in your data}
 
 \item{custom_colors}{A string of the colors you wish to have in the palette that contains the same amount of colors as unique protein/nucleotide identifiers you have in your data. The first identifier in uniques will be assigned the first color in custom_colors and so on.}
+
+\item{typemsa}{The palette you wish to use. Options are "random", "dna", "rna", "custom", "free", "ocean", "fire", "forest" and "floral".}
 }
 \value{
 Returns a color palette
