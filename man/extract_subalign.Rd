@@ -9,7 +9,8 @@ extract_subalign(
   tlist = c(),
   texcl = FALSE,
   clist = c(),
-  cexcl = FALSE
+  cexcl = FALSE,
+  stack = FALSE
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ extract_subalign(
 \item{clist}{The columns you wish to have portrayed in the plot}
 
 \item{cexcl}{Determinant if you want to include only the columns in clist, or exclude only the clist}
+
+\item{stack}{Determines if you want the columns to be stacked by sequence marker}
 }
 \value{
 Returns a tibble which contains the preferred taxa and columns, and is prepped for geom_rect()

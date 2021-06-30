@@ -10,12 +10,13 @@ plot_alignment(
   texcl = FALSE,
   clist = c(),
   cexcl = FALSE,
-  palette_msa,
+  stack = FALSE,
   uniques = NA,
+  palette_msa,
   custom_colors = NA,
   taxon_labels = FALSE,
-  graph_title = "Graph Title",
-  legend_title = "Legend"
+  graph_title = NA,
+  legend_title = NA
 )
 }
 \arguments{
@@ -29,9 +30,11 @@ plot_alignment(
 
 \item{cexcl}{Determinant if you want to include only the columns in clist, or exclude only the clist}
 
-\item{palette_msa}{The palette you wish to use. Options are "random", "dna", "rna", "custom", "free", "ocean", "fire", "forest" and "floral".}
+\item{stack}{Determines if you want the columns to be stacked by specific sequence marker}
 
 \item{uniques}{The protein/nucleotide identifiers used in your data}
+
+\item{palette_msa}{The palette you wish to use. Options are "random", "dna", "rna", "custom", "free", "ocean", "fire", "forest" and "floral".}
 
 \item{custom_colors}{A string of the colors you wish to have in the palette that contains the same amount of colors as unique protein/nucleotide identifiers you have in your data. The first identifier in uniques will be assigned the first color in custom_colors and so on.}
 
