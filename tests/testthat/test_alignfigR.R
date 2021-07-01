@@ -1,12 +1,22 @@
 # Tests
 
-read_alignment("Data/protein.fasta") -> tibble_fasta
+# Prepare the test data...
+protein_file <- system.file("extdata", "protein.fasta", package = "alignfigR") 
+#tibble_fasta <- read_alignment(protein_file) 
+#readr::write_csv(tibble_fasta, "data/protein_tibble_fasta.csv")
 
 # Read alignment tests
 
-test_that("test that read_alignment() returns a dataframe", {
-  expect_true(is.data.frame(tibble_fasta))
+test_that("test that read_alignment() returns a tibble", {
+  # Is it a tibble?
+  expect_s3_class(
+    read_alignment(protein_file),
+    c("tbl_df", "tbl","data.frame")
+  )
 })
+
+# TODO: check the right style for prepping data used in tests
+tibble_fasta <- read_alignment(protein_file)
 
 test_that("test that read_alignment() returns a tibble with the correct number of rows", {
   expect_equal(nrow(tibble_fasta), 263)
@@ -27,15 +37,25 @@ test_that("test that extract_subalign() returns a tibble with the correct number
 })
 
 test_that("test that extract_subalign() returns a tibble with the correctly named columns", {
-  expect_equal(names(extract_subalign(tibble_fasta)), c("Taxa", "seq", "x1", "x2", "y1","y2", "column"))
+  expect_equal(
+    names(extract_subalign(tibble_fasta)), 
+    c("Taxa", "seq", "x1", "x2", "y1","y2", "column")
+  )
 })
 
 test_that("test that extract_subalign() returns a tibble with the correct x1 column", {
-  expect_equal(sum(extract_subalign(tibble_fasta)$x1 == rep(1:263, 9994/263)), 9994)
+  expect_equal(
+    sum(extract_subalign(tibble_fasta)$x1 == rep(1:263, 9994/263)), 
+    9994
+  )
 })
 
 test_that("test that extract_subalign() returns a tibble with the correct x2 column", {
-  expect_equal(sum(extract_subalign(tibble_fasta)$x2 == rep(2:264, 9994/263)), 9994)
+  expect_equal(
+    sum(extract_subalign(tibble_fasta)$x2 == rep(2:264, 9994/263)), 
+    9994
+  )
+  
 })
 
 test_that("test that extract_subalign() returns a tibble with the correct y1 column", {
@@ -51,7 +71,11 @@ test_that("test that the clist in extract_subalign() functions correctly", {
 })
 
 test_that("test that the tlist in extract_subalign() functions correctly", {
-  expect_equal(sum(extract_subalign(tibble_fasta, tlist = c("C9EABACTA301505", "C9CABACTO298505", "C9DABACTP301521"))$Taxa %in% c("C9EABACTA301505", "C9CABACTO298505", "C9DABACTP301521")), 789)
+  check_array <- c("C9EABACTA301505", "C9CABACTO298505", "C9DABACTP301521")
+  expect_equal(
+    sum(extract_subalign(tibble_fasta, tlist = check_array)$Taxa %in% check_array), 
+    789
+  )
 })
 
 # Define Palette Tests
