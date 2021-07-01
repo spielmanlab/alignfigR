@@ -101,7 +101,8 @@ extract_subalign <- function(alignment, tlist = c(), texcl = FALSE, clist = c(),
   # if clist is empty
   if (length(clist)== 0){
     # data_rect is equal to d
-    data_rect -> d
+    data_rect %>%
+      dplyr::mutate(column = rep(1:length_of_taxa, number_of_rows/length_of_taxa)) -> d
     # if clist is not empty
   } else {
     # replaces 'column' column so it can be used to filter the data
@@ -218,7 +219,8 @@ plot_alignment <- function(alignment,
   if (stack) {
     plot_frame %>%
       ggplot2::ggplot() +
-      ggplot2::aes(x = column, fill = seq) +
+      ggplot2::aes(x = column, 
+                   fill = seq) +
       ggplot2::geom_bar(position = "stack") +
       ggplot2::scale_fill_manual(values = pal,
                                  name = legend_title)+
