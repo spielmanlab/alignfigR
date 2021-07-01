@@ -1,19 +1,48 @@
 # Use this script for playing around
 
-read_alignment("tests/testthat/Data/protein.fasta") -> tibble_fasta
+
+protein_file <- system.file("extdata", 
+                            "protein.fasta", 
+                            package = "alignfigR")
+read_alignment(protein_file) -> tibble_fasta
 
 plot_alignment(tibble_fasta, taxon_labels = TRUE, palette_msa = "floral", graph_title = "Graph", legend_title = "Legend", clist = c(1:260), stack = TRUE) 
 # ------------------------------------------------------------------------------------------------------
 
-extract_subalign(tibble_fasta) -> column_test
+
 
 consensus <- function(info, tibble_from_readalign) {
+  tibble_from_readalign <- tibble::tibble(
+   column = 1:4,
+   #           1    2    3    4
+   #          con  uni  con  tie
+   taxon1 = c("A", "C", "C", "A"),
+   taxon2 = c("T", "G", "G", "G"),
+   taxon3 = c("T", "T", "T", "A"),
+   taxon4 = c("T", "A", "C", "G")
+  )
+  
+  extract_subalign(tibble_from_readalign) -> info
   info %>%
     dplyr::group_by(column) %>%
-    dplyr::count(seq) -> useable_data
-  for (c in 1:nrow(tibble_from_readalign)) {
-    a <- c
-    x <- max(data$n[useable_data$column == c])
+    dplyr::count(seq) %>%
+    # to make sure arrange groups on column
+    dplyr::arrange(column, desc(n)) %>%
+    dplyr::filter(n == max(n))
+  
+  # if 1 row per column, definitely consensus
+  # if >1 row per column and all values are the same:
+  #### and all those values == 1 --> everything unique (rare)
+  #### and all those values > 1  --> TIE
+  # let's resolve ties RANDOMLY
+  
+    # the first row out of every column's n's aka consensus, maybe!
+    dplyr::slice(1)
+  
+  
+  -> column_seq_counts
+  for (a in 1:nrow(tibble_from_readalign)) {
+    x <- max(data$n[column_seq_counts$column == a])
     for (i in 1:nrow(useable_data)) {
       if (useable_data$column[i] == a) {
         if (useable_data$n[i] == x) {
@@ -27,6 +56,9 @@ consensus <- function(info, tibble_from_readalign) {
   useable_data
 }
 
+
+
+extract_subalign(tibble_fasta) -> column_test
 consensus(column_test, tibble_fasta) -> plot_frame
 unique(plot_frame$seq) -> uniques
 
