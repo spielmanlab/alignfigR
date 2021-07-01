@@ -23,11 +23,11 @@ test_that("test that extract_subalign() returns a tibble with the correct number
 })
 
 test_that("test that extract_subalign() returns a tibble with the correct number of columns", {
-  expect_equal(ncol(extract_subalign(tibble_fasta)), 6)
+  expect_equal(ncol(extract_subalign(tibble_fasta)), 7)
 })
 
 test_that("test that extract_subalign() returns a tibble with the correctly named columns", {
-  expect_equal(names(extract_subalign(tibble_fasta)), c("Taxa", "seq", "x1", "x2", "y1","y2"))
+  expect_equal(names(extract_subalign(tibble_fasta)), c("Taxa", "seq", "x1", "x2", "y1","y2", "column"))
 })
 
 test_that("test that extract_subalign() returns a tibble with the correct x1 column", {
