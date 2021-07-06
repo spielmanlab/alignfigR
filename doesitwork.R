@@ -4,10 +4,31 @@
 protein_file <- system.file("extdata", 
                             "protein.fasta", 
                             package = "alignfigR")
-read_alignment(protein_file) -> tibble_fasta
+read_alignment(protein_file)
+read_alignment("inst/extdata/protein.fasta") -> tibble_fasta
+tibble_fasta
+plot_alignment(tibble_fasta, 
+               taxa = c("C9EABACTA301505", "C9CABACTO298505", "C9DABACTP301521"),
+               sites = c(1:25),
+               color_palette = "fire",
+               taxon_labels = TRUE, 
+               legend_title = "Legend Title", 
+               graph_title = "Graph Title")
 
-plot_alignment(tibble_fasta, taxon_labels = TRUE, palette_msa = "floral", graph_title = "Graph", legend_title = "Legend", clist = c(1:260), stack = TRUE) 
-# ------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
