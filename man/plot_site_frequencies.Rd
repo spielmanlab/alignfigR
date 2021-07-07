@@ -34,8 +34,6 @@ plot_site_frequencies(
 \item{legend_title}{A String of what you want the legend title to be}
 
 \item{graph_title}{A String of what you want the graph title to be}
-
-\item{taxon_labels}{Determines if you would like rows to be labeled by their respective taxon}
 }
 \value{
 Returns a Plot of Frequencies of protein identifiers at each site

@@ -62,10 +62,10 @@ filter_taxa_and_sites <- function(fasta_tibble,
     fasta_tibble -> tibble_taxa_filtered
   } else if (exclude_taxa){
     fasta_tibble %>%
-      dplyr::select(-all_of(taxa)) -> tibble_taxa_filtered
+      dplyr::select(-tidyselect::all_of(taxa)) -> tibble_taxa_filtered
   } else {
     fasta_tibble %>%
-      dplyr::select(column, all_of(taxa)) -> tibble_taxa_filtered
+      dplyr::select(column, tidyselect::all_of(taxa)) -> tibble_taxa_filtered
   } 
   if (length(sites) == 0){
     tibble_taxa_filtered -> tibble_fully_filtered
@@ -294,7 +294,6 @@ create_site_frequencies <- function(data_longer,
 #' @param exclude_sites Determines if you wish to only include or exclude the sites in 'sites'
 #' @param color_palette The palette you wish to use. Options are "random", "dna", "rna", "custom", "free", "ocean", "fire", "forest" and "floral".
 #' @param custom_colors A string of the colors you wish to have in the palette that contains the same amount of colors as unique protein/nucleotide identifiers you have in your data. The first identifier in uniques will be assigned the first color in custom_colors and so on.
-#' @param taxon_labels Determines if you would like rows to be labeled by their respective taxon
 #' @param legend_title A String of what you want the legend title to be
 #' @param graph_title A String of what you want the graph title to be
 #' @return Returns a Plot of Frequencies of protein identifiers at each site
