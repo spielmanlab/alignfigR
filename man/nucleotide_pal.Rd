@@ -3,7 +3,7 @@
 \docType{data}
 \name{nucleotide_pal}
 \alias{nucleotide_pal}
-\title{Needs a thing}
+\title{Defines Nucleotide Palette}
 \format{
 An object of class \code{character} of length 5.
 }
@@ -11,6 +11,6 @@ An object of class \code{character} of length 5.
 nucleotide_pal
 }
 \description{
-Needs a thing
+Defines Nucleotide Palette
 }
 \keyword{datasets}

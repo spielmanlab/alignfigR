@@ -2,12 +2,12 @@
 % Please edit documentation in R/alignfigR.R
 \name{define_palette}
 \alias{define_palette}
-\title{Assigns the color palette for plot_alignment(), and allows you to select a custom palette}
+\title{Assigns the color palette for plots, and allows you to select a custom palette}
 \usage{
-define_palette(palette_msa, uniques = NA, custom_colors = NA)
+define_palette(color_palette, uniques = NA, custom_colors = NA)
 }
 \arguments{
-\item{palette_msa}{The palette you wish to use. Options are "random", "dna", "rna", "custom", "free", "ocean", "fire", "forest" and "floral".}
+\item{color_palette}{The palette you wish to use. Options are "random", "dna", "rna", "custom", "free", "ocean", "fire", "forest" and "floral".}
 
 \item{uniques}{The protein/nucleotide identifiers used in your data}
 
@@ -17,5 +17,5 @@ define_palette(palette_msa, uniques = NA, custom_colors = NA)
 Returns a color palette
 }
 \description{
-Assigns the color palette for plot_alignment(), and allows you to select a custom palette
+Assigns the color palette for plots, and allows you to select a custom palette
 }
