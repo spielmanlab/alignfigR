@@ -4,8 +4,7 @@
 protein_file <- system.file("extdata", 
                             "protein.fasta", 
                             package = "alignfigR")
-read_alignment(protein_file)
-read_alignment("inst/extdata/protein.fasta") -> tibble_fasta
+read_alignment(protein_file) -> tibble_fasta
 tibble_fasta
 plot_alignment(tibble_fasta, 
                taxa = c("C9EABACTA301505", "C9CABACTO298505", "C9DABACTP301521"),
@@ -14,6 +13,11 @@ plot_alignment(tibble_fasta,
                taxon_labels = TRUE, 
                legend_title = "Legend Title", 
                graph_title = "Graph Title")
+plot_site_frequencies(tibble_fasta, 
+                      sites = c(1:250),
+                      color_palette = "fire",
+                      legend_title = "Legend Title", 
+                      graph_title = "Graph Title")
 
 
 
