@@ -31,11 +31,6 @@ plot_site_frequencies(tibble_fasta,
 
 
 
-
-
-
-
-
 consensus <- function(info, tibble_from_readalign) {
   tibble_from_readalign <- tibble::tibble(
    column = 1:4,
