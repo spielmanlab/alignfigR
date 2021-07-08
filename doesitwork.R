@@ -8,7 +8,7 @@ read_alignment(protein_file) -> tibble_fasta
 tibble_fasta
 plot_alignment(tibble_fasta, 
                taxa = c("C9EABACTA301505", "C9CABACTO298505", "C9DABACTP301521"),
-               sites = c(1:25),
+               sites = c(1:225),
                color_palette = "fire",
                taxon_labels = TRUE, 
                legend_title = "Legend Title", 
