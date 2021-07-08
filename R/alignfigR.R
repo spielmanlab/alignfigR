@@ -282,7 +282,8 @@ create_site_frequencies <- function(data_longer,
     ggplot2::geom_bar(position = "stack") +
     ggplot2::scale_fill_manual(values = pal,
                                name = legend_title)+
-    ggplot2::labs(title = graph_title)-> plot
+    ggplot2::labs(title = graph_title) +
+    ggplot2::theme_minimal()-> plot
   return(plot)
 }
 #' Creates a Plot of Frequencies of protein identifiers at each site
