@@ -31,6 +31,9 @@ Depends:
     R (>= 3.5.0)
 Collate:
     'utils.R'
-    'alignfigR.R'
+    'read_data.R'
+    'define_palette.R'
+    'alignment_plot_functions.R'
+    'frequency_plot_functions.R'
 RoxygenNote: 7.1.1
 Config/testthat/edition: 3
