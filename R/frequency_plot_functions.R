@@ -18,10 +18,12 @@ create_site_frequencies <- function(data_longer,
   data_alphabetical %>%
     dplyr::mutate(column = rep(1:length_of_taxa,
                                number_of_rows/length_of_taxa)) %>%
-  ggplot2::ggplot() +
-    ggplot2::aes(x = column,
-                 fill = seq) +
-    ggplot2::geom_bar(position = "stack") +
+    group_by(column, seq) %>%
+    summarise(count = n()) %>%
+    mutate(percent = count/sum(count)) %>%
+    ggplot() +
+    aes(x = column, y = percent, fill = seq) +
+    geom_bar(stat = "identity") +
     ggplot2::scale_fill_manual(values = pal,
                                name = legend_title)+
     ggplot2::labs(title = graph_title) +
