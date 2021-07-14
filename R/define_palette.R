@@ -38,6 +38,12 @@ define_palette <- function(color_palette,
   } else if (tolower(color_palette) == "floral") {
     # the palette is defined below
     return(floral_pal)
+  } else if (tolower(color_palette) == "clustal") {
+    # the palette is defined below
+    return(clustal_pal)
+  } else if (tolower(color_palette) == "hydrophobicity") {
+    # the palette is defined below
+    return(hydrophobicity_pal)
   } else {
     stop("Not a valid palette.")
   }

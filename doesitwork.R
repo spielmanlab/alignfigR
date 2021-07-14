@@ -7,18 +7,18 @@ protein_file <- system.file("extdata",
 read_alignment(protein_file) -> tibble_fasta
 tibble_fasta
 plot_alignment(tibble_fasta, 
-               taxa = c("C9EABACTA301505", "C9CABACTO298505", "C9DABACTP301521"),
                sites = c(1:225),
-               color_palette = "fire",
+               color_palette = "hydrophobicity",
                taxon_labels = TRUE, 
-               legend_title = "Legend Title", 
-               graph_title = "Graph Title")
+               legend_title = "Legend", 
+               graph_title = "Example Alignment") 
+
 plot_site_frequencies(tibble_fasta, 
                       sites = c(1:250),
-                      color_palette = "fire",
-                      legend_title = "Legend Title", 
-                      graph_title = "Graph Title")
-
+                      color_palette = "clustal",
+                      legend_title = "Legend", 
+                      graph_title = "Example Site Frequency")
+#rgb(104,0,151, max=255)
 
 
 
