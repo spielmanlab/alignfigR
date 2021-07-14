@@ -44,7 +44,7 @@ read_alignment <- function(file) {
 convert_seq_list_to_tibble <- function(seq_list) {
   tibble::as_tibble(seq_list) -> new_data
   new_data %>%
-    dplyr::mutate(dplyr::across(everything(), ~toupper(.x))) %>%
+    dplyr::mutate(dplyr::across(tidyselect::everything(), ~toupper(.x))) %>%
     dplyr::mutate(column = 1:nrow(new_data)) %>%
     dplyr::select(column,
                   dplyr::everything())

@@ -20,7 +20,8 @@ Imports:
     tidyr (>= 1.0.0),
     magrittr,
     tibble, 
-    tidyselect
+    tidyselect,
+    readr
 Suggests: 
     testthat (>= 3.0.0),
     knitr,

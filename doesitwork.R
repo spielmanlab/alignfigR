@@ -20,7 +20,7 @@ plot_site_frequencies(tibble_fasta,
                       graph_title = "Example Site Frequency")
 #rgb(104,0,151, max=255)
 
-
+?everything
 
 
 
