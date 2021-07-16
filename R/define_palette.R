@@ -41,9 +41,27 @@ define_palette <- function(color_palette,
   } else if (tolower(color_palette) == "clustal") {
     # the palette is defined below
     return(clustal_pal)
+  } else if (tolower(color_palette) == "zappo") {
+    # the palette is defined below
+    return(zappo_pal)
+  } else if (tolower(color_palette) == "taylor") {
+    # the palette is defined below
+    return(taylor_pal)
   } else if (tolower(color_palette) == "hydrophobicity") {
     # the palette is defined below
     return(hydrophobicity_pal)
+  } else if (tolower(color_palette) == "helixpro") {
+    # the palette is defined below
+    return(helix_propensity_pal)
+  } else if (tolower(color_palette) == "strandpro") {
+    # the palette is defined below
+    return(strand_propensity_pal)
+  } else if (tolower(color_palette) == "turnpro") {
+    # the palette is defined below
+    return(turn_propensity_pal)
+  } else if (tolower(color_palette) == "buried index") {
+    # the palette is defined below
+    return(buried_index_pal)
   } else {
     stop("Not a valid palette.")
   }
