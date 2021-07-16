@@ -9,8 +9,8 @@ create_alignment(
   rect_alignment,
   pal,
   taxon_labels = FALSE,
-  legend_title = NA,
-  graph_title = NA
+  legend_title = "Legend Title",
+  graph_title = "Graph Title"
 )
 }
 \arguments{

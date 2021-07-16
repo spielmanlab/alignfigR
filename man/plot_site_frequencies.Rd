@@ -13,8 +13,8 @@ plot_site_frequencies(
   exclude_sites = FALSE,
   color_palette,
   custom_colors = NA,
-  legend_title = NA,
-  graph_title = NA
+  legend_title = "Legend Title",
+  graph_title = "Graph Title"
 )
 
 plot_site_frequencies(
@@ -25,8 +25,8 @@ plot_site_frequencies(
   exclude_sites = FALSE,
   color_palette,
   custom_colors = NA,
-  legend_title = NA,
-  graph_title = NA
+  legend_title = "Legend Title",
+  graph_title = "Graph Title"
 )
 }
 \arguments{

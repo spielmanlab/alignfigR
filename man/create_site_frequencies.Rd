@@ -5,9 +5,19 @@
 \alias{create_site_frequencies}
 \title{Creates the plot for plot_site_frequencies}
 \usage{
-create_site_frequencies(data_longer, pal, legend_title = NA, graph_title = NA)
+create_site_frequencies(
+  data_longer,
+  pal,
+  legend_title = "Legend Title",
+  graph_title = "Legend Title"
+)
 
-create_site_frequencies(data_longer, pal, legend_title = NA, graph_title = NA)
+create_site_frequencies(
+  data_longer,
+  pal,
+  legend_title = "Legend Title",
+  graph_title = "Legend Title"
+)
 }
 \arguments{
 \item{data_longer}{The Output from make_data_longer}
