@@ -7,8 +7,8 @@
 #' @return Returns a Plot of Frequencies of protein identifiers at each site
 create_site_frequencies <- function(data_longer,
                                     pal,
-                                    legend_title = NA,
-                                    graph_title = NA) {
+                                    legend_title = "Legend Title",
+                                    graph_title = "Legend Title") {
   # Reorders the taxa to be alphabetical
   data_longer[order(data_longer$Taxa),] -> data_alphabetical
   # Counts the number of rows and saves it to number_of_rows
@@ -52,8 +52,8 @@ plot_site_frequencies <- function(fasta_tibble,
                                   exclude_sites = FALSE,
                                   color_palette,
                                   custom_colors = NA,
-                                  legend_title = NA,
-                                  graph_title = NA) {
+                                  legend_title = "Legend Title",
+                                  graph_title = "Graph Title") {
   filter_taxa_and_sites(fasta_tibble,
                         taxa,
                         exclude_taxa,

@@ -36,8 +36,8 @@ create_alignment <- function(data_filtered,
                              rect_alignment,
                              pal,
                              taxon_labels = FALSE,
-                             legend_title = NA,
-                             graph_title = NA) {
+                             legend_title = "Legend Title",
+                             graph_title = "Graph Title") {
   if (taxon_labels == FALSE){
     # defines plot as
     plot <- ggplot2::ggplot() +
@@ -98,8 +98,8 @@ plot_alignment <- function(fasta_tibble,
                            color_palette,
                            custom_colors = NA,
                            taxon_labels = FALSE,
-                           legend_title = NA,
-                           graph_title = NA) {
+                           legend_title = "Legend Title",
+                           graph_title = "Graph Title") {
   filter_taxa_and_sites(fasta_tibble,
                         taxa,
                         exclude_taxa,
