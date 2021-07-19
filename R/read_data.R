@@ -55,7 +55,7 @@ convert_seq_list_to_tibble <- function(seq_list) {
 
 #' Allows the user to select what taxa and sites are present in the graphs
 #'
-#' @param fasta_tibble Output from convert_seq_list_to_tibble
+#' @param fasta_tibble Tibble output from read_alignment()
 #' @param taxa List of desired or undesired taxa
 #' @param exclude_taxa Determines if you wish to only include or exclude the taxa in 'taxa'
 #' @param sites List of desired positions in the fasta sequence
