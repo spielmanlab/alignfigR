@@ -13,7 +13,7 @@ filter_taxa_and_sites(
 )
 }
 \arguments{
-\item{fasta_tibble}{Output from convert_seq_list_to_tibble}
+\item{fasta_tibble}{Tibble output from read_alignment()}
 
 \item{taxa}{List of desired or undesired taxa}
 
