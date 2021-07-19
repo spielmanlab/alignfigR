@@ -8,3 +8,6 @@ create_geom_rect_alignment_file <- file.path("data", "create_geom_rect_alignment
 readr::read_csv(data_longer_file) -> data_longer_test
 readr::read_csv(create_geom_rect_alignment_file) -> create_geom_rect_alignment_test
 tibble_fasta <- read_alignment(protein_file)
+filter_taxa_and_sites(tibble_fasta,sites = c(1:150), exclude_sites = TRUE) -> filter_test
+prep_site_frequencies(data_longer_test) -> prep_site_frequencies_test
+

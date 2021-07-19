@@ -84,10 +84,7 @@ test_that("test that filter_taxa_and_sites() can exclude only desired taxa", {
 
 test_that("test that filter_taxa_and_sites() can exclude only desired sites", {
   expect_equal(
-    nrow(
-      filter_taxa_and_sites(
-        tibble_fasta,
-        sites = c(1:150), exclude_sites = TRUE)),
+    sum(filter_test$column == c(151:263)),
     113)
 })
 
@@ -152,6 +149,23 @@ test_that("plot_alignment() returns ggplot object",{
             "ggplot")
 })
 
+# prep_site_frequencies()
+test_that("prep_site_frequencies() returns tibble object",{
+  expect_s3_class(prep_site_frequencies(data_longer_test),
+                  c("tbl_df","tbl","data.frame"))
+})
+
+# plot_frequencies
+test_that("plot_frequencies() returns ggplot object",{
+  expect_s3_class(plot_frequencies(prep_site_frequencies_test),
+                  "ggplot")
+})
+
+# plot_site_frequencies
+test_that("plot_site_frequencies() returns ggplot object",{
+  expect_s3_class(plot_site_frequencies(tibble_fasta, color_palette = "clustal"),
+                  "ggplot")
+})
 
 
 
