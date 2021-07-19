@@ -4,7 +4,7 @@
 #' @param uniques The protein/nucleotide identifiers used in your data
 #' @param custom_colors A string of the colors you wish to have in the palette that contains the same amount of colors as unique protein/nucleotide identifiers you have in your data. The first identifier in uniques will be assigned the first color in custom_colors and so on.
 #' @return Returns a color palette
-define_palette <- function(color_palette,
+define_palette <- function(color_palette = "default",
                            uniques = NA,
                            custom_colors = NA){
   if (tolower(color_palette) == "random") {
@@ -15,7 +15,7 @@ define_palette <- function(color_palette,
                       length(uniques))
     names(palette) <- uniques
     return(palette)
-  } else if (tolower(color_palette) == "dna" || tolower(color_palette) == "rna"){
+  } else if (tolower(color_palette) == "nucleotide"){
     return(nucleotide_pal)
   } else if (tolower(color_palette) == "custom") {
     # palette is defined as custom_colors
@@ -23,9 +23,9 @@ define_palette <- function(color_palette,
     # names of the palette are defined as the bases
     names(palette) <- uniques
     return(palette)
-  } else if (tolower(color_palette) == "basic") {
+  } else if (tolower(color_palette) == "default") {
     # the palette is defined below
-    return(basic_pal)
+    return(default_pal)
   } else if (tolower(color_palette) == "ocean") {
     # the palette is defined below
     return(ocean_pal)
@@ -62,6 +62,9 @@ define_palette <- function(color_palette,
   } else if (tolower(color_palette) == "buried index") {
     # the palette is defined below
     return(buried_index_pal)
+  } else if (tolower(color_palette) == "purpyr") {
+    # the palette is defined below
+    return(purine_pyrimidine_pal)
   } else {
     stop("Not a valid palette.")
   }

@@ -4,7 +4,7 @@
 \alias{define_palette}
 \title{Assigns the color palette for plots, and allows you to select a custom palette}
 \usage{
-define_palette(color_palette, uniques = NA, custom_colors = NA)
+define_palette(color_palette = "default", uniques = NA, custom_colors = NA)
 }
 \arguments{
 \item{color_palette}{The palette you wish to use. Options are "random", "dna", "rna", "custom", "free", "ocean", "fire", "forest" and "floral".}

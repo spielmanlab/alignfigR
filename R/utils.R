@@ -21,13 +21,20 @@ null_color <- "grey85"
 ZERO <- 1e-12
 
 #' Defines Nucleotide Palette
-nucleotide_pal <- c("A"= "mediumblue", 
-                    "G"="orangered1",
-                    "C"= "limegreen", 
-                    "T"= "khaki1", 
-                    "U"= "khaki1")
+nucleotide_pal <- c("A"= "66F455", 
+                    "G"="FFAF4D",
+                    "C"= "EE4140", 
+                    "T"= "288BEA", 
+                    "U"= "288BEA")
+purine_pyrimidine_pal <- c("A"= "FF86F6", 
+                           "G"="36DFCF",
+                           "C"= "FF86F6", 
+                           "T"= "36DFCF", 
+                           "U"= "36DFCF",
+                           "R"= "FF86F6",
+                           "Y"= "36DFCF")
 #' Defines basic Palette
-basic_pal <- c("A" = "limegreen", "G" = "lightgreen",
+default_pal <- c("A" = "limegreen", "G" = "lightgreen",
                "C" = "hotpink1", "T" = "red",
                "U" = "lightsalmon", "J" = "maroon",
                "B" = "snow", "O" = "mediumorchid",
@@ -220,6 +227,21 @@ buried_index_pal <- c("A" = "#00A35C", "G" = "#009D62",
                       "K" = "#00FF00", "R" = "#00FC03",
                       "P" = "#00E01F", "-" = null_color,
                       "S" = "#00D52A", "X" = "#00B649")
+
+# read_alignment() tests
+c("column", "C9EABACTA301505",   "C9CABACTO298505",  
+ "C9DABACTP301521" ,  "Q45745BACTU277497", "C1GBBACTZ253449",
+ "C1GABACTU253446" ,  "C1HBBACTM256454"   ,"C1EABACTX258454" , 
+ "C1EBBACTA257453",   "C1DABACTA258450"   ,"C1CABACTE258457" , 
+ "Q45749BACTU257454", "C1JABACTU258449",   "C1JBBACTU258449"  ,
+ "C1ABBACTK259461"  , "C7AABACTU286487" ,  "C1BBBACTU283495"  ,
+ "C1BEBACTU283493"  , "C1BABACTK278489"  , "C1IABACTK287497"  ,
+ "C1KABACTM284490"  , "C3CABACTK293502"  , "C3AABACTT295499"  ,
+ "C3BABACTO304510"  , "C8CABACTP298503"  , "C9AABACTG295510"  ,
+ "C20AABACUF288485" , "C19BABACUH293496" , "C19AABACTJ300502" ,
+"C4AABACTI322528"  , "CAAABACTI308500"  , "C4BABACTI283470"  ,
+"C16AACLOBI252441" , "C17AACLOBI265438" , "C25AABACTJ303514" ,
+"C13AABACTU328534" , "C14AABACTS320521" , "C18AAPAEPP344563") -> tibble_fasta_names
 # filter_taxa_and_sites()
 c("column", "Q45745BACTU277497", "C1GBBACTZ253449", 
   "C1GABACTU253446", "C1HBBACTM256454",  "C1EABACTX258454",  
@@ -233,6 +255,7 @@ c("column", "Q45745BACTU277497", "C1GBBACTZ253449",
   "C4AABACTI322528", "CAAABACTI308500",  "C4BABACTI283470",  
   "C16AACLOBI252441", "C17AACLOBI265438",  "C25AABACTJ303514", 
   "C13AABACTU328534", "C14AABACTS320521",  "C18AAPAEPP344563") -> taxa_exclusion_test
+
 # create_geom_rect_alignment()
 c("Taxa", "seq", "x1", "x2", "y1", "y2") -> create_geom_rect_alignment_names
 # Should I put this here
