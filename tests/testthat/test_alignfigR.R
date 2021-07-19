@@ -8,12 +8,18 @@ test_that("test that read_alignment() returns a tibble", {
     c("tbl_df", "tbl","data.frame")
   )
 })
+test_that("test that read_alignment() returns a tibble with the correct columns names", {
+  expect_equal(
+    names(
+    read_alignment(protein_file)),
+  tibble_fasta_names
+  )
+})
 test_that("test that read_alignment() returns a tibble with the correct number of rows", {
   expect_equal(
     nrow(tibble_fasta),
     263)
 })
-
 test_that("test that read_alignment() returns a tibble with the correct number of columns", {
   expect_equal(
     ncol(tibble_fasta),
@@ -22,9 +28,9 @@ test_that("test that read_alignment() returns a tibble with the correct number o
 # Define Palette Tests
 
 test_that("test that define_palette() returns the correct palette", {
-  expect_equal(define_palette("dna"), nucleotide_pal)
-  expect_equal(define_palette("rna"), nucleotide_pal)
-  expect_equal(define_palette("basic"), basic_pal)
+  expect_equal(define_palette("purpyr"), purine_pyrimidine_pal)
+  expect_equal(define_palette("nucleotide"), nucleotide_pal)
+  expect_equal(define_palette("default"), default_pal)
   expect_equal(define_palette("ocean"), ocean_pal)
   expect_equal(define_palette("forest"), forest_pal)
   expect_equal(define_palette("fire"), fire_pal)
@@ -41,6 +47,13 @@ test_that("test that define_palette() returns the correct palette", {
 })
 
 # filter_taxa_and_sites Tests
+
+test_that("test that filter_taxa_and_sites() returns a tibble", {
+  expect_s3_class(
+    filter_taxa_and_sites(
+      tibble_fasta),
+    c("tbl_df","tbl", "data.frame"))
+})
 
 test_that("test that filter_taxa_and_sites() can select only desired taxa", {
   expect_equal(
@@ -80,6 +93,13 @@ test_that("test that filter_taxa_and_sites() can exclude only desired sites", {
 
 # make_data_longer Tests
 
+test_that("test that make_data_longer() returns a tibble", {
+  expect_s3_class(
+      make_data_longer(
+        tibble_fasta),
+  c("tbl_df","tbl", "data.frame"))
+})
+
 test_that("test that make_data_longer() has correct column names", {
   expect_equal(
     names(
@@ -97,6 +117,14 @@ test_that("test that make_data_longer() has correct number of rows", {
 })
 
 # create_geom_rect_alignment Test
+
+test_that("test that create_geom_rect() returns a tibble", {
+  expect_s3_class(
+    create_geom_rect_alignment(
+      data_longer_test),
+    c("tbl_df","tbl", "data.frame"))
+})
+
 test_that("test that create_geom_rect_alignment() has correct number of rows", {
   expect_equal(
     nrow(
@@ -116,6 +144,12 @@ test_that("test that create_geom_rect_alignment() has correct column names", {
     names(
       create_geom_rect_alignment(data_longer_test)),
     create_geom_rect_alignment_names)
+})
+
+# Plot Alignment
+test_that("plot_alignment() returns ggplot object",{
+  expect_s3_class(plot_alignment(tibble_fasta, color_palette = "forest"),
+            "ggplot")
 })
 
 
