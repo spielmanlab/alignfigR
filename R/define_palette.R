@@ -7,15 +7,7 @@
 define_palette <- function(color_palette = "default",
                            uniques = NA,
                            custom_colors = NA){
-  if (tolower(color_palette) == "random") {
-    # subcolors is equal to colors without null_color
-    subcolors <- grDevices::colors()[grDevices::colors() != null_color]
-    # palette is equal to a random sampling of subcolors, the same length as uniques
-    palette <- sample(subcolors,
-                      length(uniques))
-    names(palette) <- uniques
-    return(palette)
-  } else if (tolower(color_palette) == "nucleotide"){
+  if (tolower(color_palette) == "nucleotide"){
     return(nucleotide_pal)
   } else if (tolower(color_palette) == "custom") {
     # palette is defined as custom_colors
