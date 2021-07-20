@@ -8,6 +8,14 @@ test_that("test that read_alignment() returns a tibble", {
     c("tbl_df", "tbl","data.frame")
   )
 })
+
+test_that("test that read_alignment() can recognize a non-alignment", {
+  # Is it a tibble?
+  expect_error(
+    read_alignment(incorrect_protein_file)
+  )
+})
+
 test_that("test that read_alignment() returns a tibble with the correct columns names", {
   expect_equal(
     names(
@@ -28,6 +36,7 @@ test_that("test that read_alignment() returns a tibble with the correct number o
 # Define Palette Tests
 
 test_that("test that define_palette() returns the correct palette", {
+  expect_equal(names(define_palette(color_palette = "custom", uniques = c("A", "C", "G", "T"), custom_colors = c("dodgerblue", "cornsilk1", "red", "black"))), c("A", "C", "G", "T"))
   expect_equal(define_palette("purpyr"), purine_pyrimidine_pal)
   expect_equal(define_palette("nucleotide"), nucleotide_pal)
   expect_equal(define_palette("default"), default_pal)
@@ -147,6 +156,11 @@ test_that("test that create_geom_rect_alignment() has correct column names", {
 test_that("plot_alignment() returns ggplot object",{
   expect_s3_class(plot_alignment(tibble_fasta, color_palette = "forest"),
             "ggplot")
+})
+
+test_that("plot_alignment() returns ggplot object if taxon labels = TRUE",{
+  expect_s3_class(plot_alignment(tibble_fasta, color_palette = "forest", taxon_labels = TRUE),
+                  "ggplot")
 })
 
 # prep_site_frequencies()
