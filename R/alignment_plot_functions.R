@@ -100,6 +100,9 @@ plot_alignment <- function(fasta_tibble,
                            taxon_labels = FALSE,
                            legend_title = "Legend Title",
                            graph_title = "Graph Title") {
+  fasta_tibble[1,1] -> type_of_data
+  fasta_tibble %>%
+    dplyr::select(-type_data) -> fasta_tibble
   filter_taxa_and_sites(fasta_tibble,
                         taxa,
                         exclude_taxa,

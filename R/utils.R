@@ -20,6 +20,9 @@ null_color <- "grey85"
 #' @noRd
 ZERO <- 1e-12
 
+#' Defines Nucleotides
+c("A", "G", "C", "T") -> nucleotides
+
 #' Defines Nucleotide Palette
 nucleotide_pal <- c("A"= "66F455", 
                     "G"="FFAF4D",
@@ -229,7 +232,7 @@ buried_index_pal <- c("A" = "#00A35C", "G" = "#009D62",
                       "S" = "#00D52A", "X" = "#00B649")
 
 # read_alignment() tests
-c("column", "C9EABACTA301505",   "C9CABACTO298505",  
+c("type_data", "column", "C9EABACTA301505",   "C9CABACTO298505",  
  "C9DABACTP301521" ,  "Q45745BACTU277497", "C1GBBACTZ253449",
  "C1GABACTU253446" ,  "C1HBBACTM256454"   ,"C1EABACTX258454" , 
  "C1EBBACTA257453",   "C1DABACTA258450"   ,"C1CABACTE258457" , 
@@ -243,7 +246,7 @@ c("column", "C9EABACTA301505",   "C9CABACTO298505",
 "C16AACLOBI252441" , "C17AACLOBI265438" , "C25AABACTJ303514" ,
 "C13AABACTU328534" , "C14AABACTS320521" , "C18AAPAEPP344563") -> tibble_fasta_names
 # filter_taxa_and_sites()
-c("column", "Q45745BACTU277497", "C1GBBACTZ253449", 
+c("type_data", "column", "Q45745BACTU277497", "C1GBBACTZ253449", 
   "C1GABACTU253446", "C1HBBACTM256454",  "C1EABACTX258454",  
   "C1EBBACTA257453", "C1DABACTA258450",  "C1CABACTE258457" , 
   "Q45749BACTU257454", "C1JABACTU258449",  "C1JBBACTU258449", 

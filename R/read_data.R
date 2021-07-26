@@ -32,7 +32,8 @@ read_alignment <- function(file) {
   # Check to make sure all alignments have the same number of sites
   if ( sum(lengths != lengths[1]) != 0 )
     stop("Your provided file is not an alignment. Please provide an alignment file in FASTA format to use alignfigR.")
-  convert_seq_list_to_tibble(seq_list)
+  convert_seq_list_to_tibble(seq_list) -> data_tibble
+  determine_type(data_tibble)
 }
 
 
@@ -104,6 +105,33 @@ make_data_longer <- function(filtered_data) {
                         names_to = "Taxa",
                         # Moves values to 'seq' and sets it equal to data_longer
                         values_to = "seq")
+}
+
+#' Allows the package to determine data type, as well as allowing the user to specify this
+#'
+#' @param data Tibble output from convert_seq_list_to_tibble()
+#' @return Returns a tibble of the data that contains a column containing the type of data
+determine_type <- function(data) {
+make_data_longer(data) -> data_longer
+data_longer %>%
+  dplyr::count(seq) %>%
+  dplyr::filter(seq != "-") %>%
+  dplyr::select(n) %>%
+  sum() -> total_seqs
+data_longer %>%
+  dplyr::count(seq) %>%
+  dplyr::filter(seq %in% nucleotides) %>%
+  dplyr::select(n) %>%
+  sum() -> total_nucs
+total_nucs/total_seqs -> percent_nucs
+if (percent_nucs < .9) {
+  type <- "Protein"
+} else {
+  type <- "Nucleotide"
+}
+data %>%
+  dplyr::mutate(type_data = type) %>%
+  dplyr::select(type_data, everything())
 }
 
 
