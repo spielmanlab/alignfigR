@@ -31,7 +31,7 @@ test_that("test that read_alignment() returns a tibble with the correct number o
 test_that("test that read_alignment() returns a tibble with the correct number of columns", {
   expect_equal(
     ncol(tibble_fasta),
-    39)
+    40)
 })
 # Define Palette Tests
 
@@ -119,7 +119,7 @@ test_that("test that make_data_longer() has correct number of rows", {
     nrow(
       make_data_longer(
         tibble_fasta)),
-    9994)
+    10257)
 })
 
 # create_geom_rect_alignment Test
