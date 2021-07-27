@@ -111,6 +111,7 @@ make_data_longer <- function(filtered_data) {
 #' Allows the package to determine data type, as well as allowing the user to specify this
 #'
 #' @param data Tibble output from convert_seq_list_to_tibble()
+#' @param data_type The data_type associated with the data. If left blank, the function will determine the type of data 
 #' @return Returns a tibble of the data that contains a column containing the type of data
 determine_type <- function(data, data_type = "") {
 if (tolower(data_type) == "protein") {
