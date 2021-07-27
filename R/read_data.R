@@ -126,7 +126,7 @@ if (tolower(data_type) == "protein") {
 make_data_longer(data) -> data_longer
 calculate_total_identifiers(data_longer) -> total_identifiers
 if (total_identifiers == 0) {
-  type <- "character"
+  type <- "Character"
 } else {
 calculate_total_seqs(data_longer) -> total_seqs
 calculate_total_nucs(data_longer) -> total_nucs
