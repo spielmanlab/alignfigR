@@ -111,8 +111,19 @@ make_data_longer <- function(filtered_data) {
 #'
 #' @param data Tibble output from convert_seq_list_to_tibble()
 #' @return Returns a tibble of the data that contains a column containing the type of data
-determine_type <- function(data) {
+determine_type <- function(data, data_type = "") {
+if (tolower(data_type) == "protein") {
+  type <- "Protein"
+} else if (tolower(data_type) == "nucleotide") {
+  type <- "Nucleotide"
+} else if (tolower(data_type) == "character") {
+  type <- "Character"
+} else {
 make_data_longer(data) -> data_longer
+calculate_total_identifiers(data_longer) -> total_identifiers
+if (total_identifiers == 0) {
+  type <- "character"
+} else {
 calculate_total_seqs(data_longer) -> total_seqs
 calculate_total_nucs(data_longer) -> total_nucs
 total_nucs/total_seqs -> percent_nucs
@@ -121,12 +132,14 @@ if (percent_nucs < .9) {
 } else {
   type <- "Nucleotide"
 }
+}
+}
 data %>%
   dplyr::mutate(type_data = type) %>%
   dplyr::select(type_data, everything())
 }
 
-#' Allows the package to determine data type, as well as allowing the user to specify this
+#' Calculates total seqs besides gaps in the data
 #'
 #' @param data_longer Tibble output from make_data_longer()
 #' @return Returns a sum of the number of proteins/nucleotides (ignoring gaps) in the data
@@ -138,7 +151,7 @@ calculate_total_seqs <- function(data_longer) {
   sum() 
 }
 
-#' Allows calculates the total number of nucleotides in the data
+#' Calculates the total number of nucleotides in the data
 #'
 #' @param data_longer Tibble output from make_data_longer()
 #' @return Returns a sum of the number of nucleotides in the data
@@ -150,6 +163,17 @@ calculate_total_nucs <- function(data_longer) {
     sum()
 }
 
+#' Calculates the total number of protein/nucleotide identifiers in the data
+#'
+#' @param data_longer Tibble output from make_data_longer()
+#' @return Returns a sum of the number of nucleotides in the data
+calculate_total_identifiers <- function(data_longer) {
+  data_longer %>%
+    dplyr::filter(seq %in% nucs_protein_identifiers) %>%
+    dplyr::count(seq) %>%
+    dplyr::select(n) %>%
+    sum()
+}
 
 
 
