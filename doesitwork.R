@@ -1,27 +1,21 @@
-# Use this script for playing around
+# Good Examples
 
 
 protein_file <- system.file("extdata", 
                             "protein.fasta", 
-                            package = "alignfigR")
-read_alignment(protein_file) -> tibble_fasta
+                            package = "alignfigR") 
+# Try leaving data_type blank so the function can determine it, or try character, protein, or nucleotide!
+read_alignment(protein_file, data_type = "character") -> tibble_fasta 
 tibble_fasta
 plot_alignment(tibble_fasta, 
                sites = c(1:225),
-               color_palette = "hydrophobicity",
-               taxon_labels = TRUE, 
-               legend_title = "Legend", 
-               graph_title = "Example Alignment") 
-
+               color_palette = "clustal",
+               taxon_labels = TRUE) 
 plot_site_frequencies(tibble_fasta, 
                       sites = c(1:250),
                       color_palette = "clustal",
                       legend_title = "Legend", 
                       graph_title = "Example Site Frequency")
-#rgb(104,0,151, max=255)
-
-?everything
-
 
 
 
