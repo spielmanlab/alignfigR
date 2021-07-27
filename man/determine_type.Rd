@@ -8,6 +8,8 @@ determine_type(data, data_type = "")
 }
 \arguments{
 \item{data}{Tibble output from convert_seq_list_to_tibble()}
+
+\item{data_type}{The data_type associated with the data. If left blank, the function will determine the type of data}
 }
 \value{
 Returns a tibble of the data that contains a column containing the type of data
