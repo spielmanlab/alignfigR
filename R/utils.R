@@ -230,6 +230,12 @@ buried_index_pal <- c("A" = "#00A35C", "G" = "#009D62",
                       "K" = "#00FF00", "R" = "#00FC03",
                       "P" = "#00E01F", "-" = null_color,
                       "S" = "#00D52A", "X" = "#00B649")
+nucs_protein_identifiers <- c("A", "G", "C" , "T" , 
+                              "U" , "J" , "B" , "O" , 
+                              "D" , "E" , "N" , "Q" , "I" , 
+                              "L" , "M" , "F" , "W" , "Y" , 
+                              "V" ,  "H" , "Z" , "K" , "R" , 
+                              "P" , "-", "S" , "X")
 
 # read_alignment() tests
 c("type_data", "column", "C9EABACTA301505",   "C9CABACTO298505",  
