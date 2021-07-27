@@ -13,4 +13,9 @@ readr::read_csv(incorrect_protein_file) -> incorrect_protein_test
 tibble_fasta <- read_alignment(protein_file)
 filter_taxa_and_sites(tibble_fasta,sites = c(1:150), exclude_sites = TRUE) -> filter_test
 prep_site_frequencies(data_longer_test) -> prep_site_frequencies_test
-
+determine_type(tibble_fasta, data_type = "Protein") -> user_determine_protein_test
+user_determine_protein_test[1,1] -> type_protein
+determine_type(tibble_fasta, data_type = "Character") -> user_determine_character_test
+user_determine_character_test[1,1] -> type_character
+determine_type(tibble_fasta, data_type = "Nucleotide") -> user_determine_nuc_test
+user_determine_nuc_test[1,1] -> type_nuc

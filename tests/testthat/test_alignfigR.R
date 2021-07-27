@@ -181,7 +181,12 @@ test_that("plot_site_frequencies() returns ggplot object",{
                   "ggplot")
 })
 
-
+# determine_type
+test_that("determine_type() allows the user to select the correct data_type",{
+  expect_true(type_protein == "Protein")
+  expect_true(type_character == "Character")
+  expect_true(type_nuc == "Nucleotide")
+})
 
 
 
