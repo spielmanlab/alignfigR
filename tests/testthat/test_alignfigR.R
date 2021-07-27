@@ -186,6 +186,9 @@ test_that("determine_type() allows the user to select the correct data_type",{
   expect_true(type_protein == "Protein")
   expect_true(type_character == "Character")
   expect_true(type_nuc == "Nucleotide")
+  expect_true(user_determine_invalid_test == "Not a Valid Data Type")
+  expect_true(type_nuc_determine == "Nucleotide")
+  expect_true(type_character_determine == "Character")
 })
 
 
