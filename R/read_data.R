@@ -1,8 +1,9 @@
 #' Transforms fasta into a tibble
 #'
 #' @param file The fasta
+#' @param data_type The data_type associated with the data. If left blank, the function will determine the type of data
 #' @return Returns a tibble of the fasta data
-read_alignment <- function(file) {
+read_alignment <- function(file, data_type = "") {
   # separates lines so there's a away to use them independently
   raw_data <- readLines(file,
                         warn = FALSE )
@@ -33,7 +34,7 @@ read_alignment <- function(file) {
   if ( sum(lengths != lengths[1]) != 0 )
     stop("Your provided file is not an alignment. Please provide an alignment file in FASTA format to use alignfigR.")
   convert_seq_list_to_tibble(seq_list) -> data_tibble
-  determine_type(data_tibble)
+  determine_type(data_tibble, data_type)
 }
 
 
@@ -118,6 +119,8 @@ if (tolower(data_type) == "protein") {
   type <- "Nucleotide"
 } else if (tolower(data_type) == "character") {
   type <- "Character"
+} else if (data_type != "") {
+  return("Not a Valid Data Type")
 } else {
 make_data_longer(data) -> data_longer
 calculate_total_identifiers(data_longer) -> total_identifiers

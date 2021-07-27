@@ -4,10 +4,12 @@
 \alias{read_alignment}
 \title{Transforms fasta into a tibble}
 \usage{
-read_alignment(file)
+read_alignment(file, data_type = "")
 }
 \arguments{
 \item{file}{The fasta}
+
+\item{data_type}{The data_type associated with the data. If left blank, the function will determine the type of data}
 }
 \value{
 Returns a tibble of the fasta data
