@@ -113,16 +113,8 @@ make_data_longer <- function(filtered_data) {
 #' @return Returns a tibble of the data that contains a column containing the type of data
 determine_type <- function(data) {
 make_data_longer(data) -> data_longer
-data_longer %>%
-  dplyr::count(seq) %>%
-  dplyr::filter(seq != "-") %>%
-  dplyr::select(n) %>%
-  sum() -> total_seqs
-data_longer %>%
-  dplyr::count(seq) %>%
-  dplyr::filter(seq %in% nucleotides) %>%
-  dplyr::select(n) %>%
-  sum() -> total_nucs
+calculate_total_seqs(data_longer) -> total_seqs
+calculate_total_nucs(data_longer) -> total_nucs
 total_nucs/total_seqs -> percent_nucs
 if (percent_nucs < .9) {
   type <- "Protein"
@@ -132,6 +124,30 @@ if (percent_nucs < .9) {
 data %>%
   dplyr::mutate(type_data = type) %>%
   dplyr::select(type_data, everything())
+}
+
+#' Allows the package to determine data type, as well as allowing the user to specify this
+#'
+#' @param data_longer Tibble output from make_data_longer()
+#' @return Returns a sum of the number of proteins/nucleotides (ignoring gaps) in the data
+calculate_total_seqs <- function(data_longer) {
+  data_longer %>%
+  dplyr::count(seq) %>%
+  dplyr::filter(seq != "-") %>%
+  dplyr::select(n) %>%
+  sum() 
+}
+
+#' Allows calculates the total number of nucleotides in the data
+#'
+#' @param data_longer Tibble output from make_data_longer()
+#' @return Returns a sum of the number of nucleotides in the data
+calculate_total_nucs <- function(data_longer) {
+  data_longer %>%
+    dplyr::count(seq) %>%
+    dplyr::filter(seq %in% nucleotides) %>%
+    dplyr::select(n) %>%
+    sum()
 }
 
 
