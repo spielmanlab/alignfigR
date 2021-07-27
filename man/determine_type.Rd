@@ -4,7 +4,7 @@
 \alias{determine_type}
 \title{Allows the package to determine data type, as well as allowing the user to specify this}
 \usage{
-determine_type(data)
+determine_type(data, data_type = "")
 }
 \arguments{
 \item{data}{Tibble output from convert_seq_list_to_tibble()}
