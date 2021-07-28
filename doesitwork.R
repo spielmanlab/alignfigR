@@ -10,7 +10,7 @@ tibble_fasta
 nucleotide_fasta
 plot_alignment(tibble_fasta, 
                sites = c(1:225),
-               color_palette = "clustal",
+                color_palette = "clustal",
                taxon_labels = TRUE) 
 plot_site_frequencies(tibble_fasta, 
                       sites = c(1:250),

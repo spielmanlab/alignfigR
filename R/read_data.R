@@ -131,7 +131,7 @@ if (total_identifiers == 0) {
 calculate_total_seqs(data_longer) -> total_seqs
 calculate_total_nucs(data_longer) -> total_nucs
 total_nucs/total_seqs -> percent_nucs
-if (percent_nucs < .9) {
+if (percent_nucs < determine_type_threshold) {
   type <- "Protein"
 } else {
   type <- "Nucleotide"

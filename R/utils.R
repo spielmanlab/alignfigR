@@ -270,7 +270,7 @@ c("Taxa", "seq", "x1", "x2", "y1", "y2") -> create_geom_rect_alignment_names
 # Should I put this here
 utils::globalVariables("percent")
 
-
+determine_type_threshold <- 0.9
 
 
 
