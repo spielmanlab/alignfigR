@@ -7,6 +7,7 @@ protein_file <- system.file("extdata",
 # Try leaving data_type blank so the function can determine it, or try character, protein, or nucleotide!
 read_alignment(protein_file, data_type = "") -> tibble_fasta 
 tibble_fasta
+nucleotide_fasta
 plot_alignment(tibble_fasta, 
                sites = c(1:225),
                color_palette = "clustal",
