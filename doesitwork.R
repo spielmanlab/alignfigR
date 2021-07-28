@@ -2,7 +2,7 @@
 ?plot_site_frequencies
 
 protein_file <- system.file("extdata", 
-                            "protein.fasta", 
+                            "nucleotide.fasta", 
                             package = "alignfigR") 
 # Try leaving data_type blank so the function can determine it, or try character, protein, or nucleotide!
 read_alignment(protein_file, data_type = "") -> tibble_fasta 
@@ -15,7 +15,7 @@ plot_alignment(tibble_fasta,
 plot_site_frequencies(tibble_fasta, 
                       sites = c(1:250),
                       color_palette = "clustal",
-                      legend_title = "Legend", 
+                      legend_title = "Legend1", 
                       graph_title = "Example Site Frequency")
 
 
