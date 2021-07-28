@@ -75,6 +75,6 @@ plot_site_frequencies <- function(fasta_tibble,
   prep_site_frequencies(data_longer) -> output_from_prep_site_frequencies
   plot_frequencies(output_from_prep_site_frequencies, 
                    pal,
-                   legend_title = "Legend Title",
-                   graph_title = "Legend Title")
+                   legend_title = legend_title,
+                   graph_title = graph_title)
 } 
