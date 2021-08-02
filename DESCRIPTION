@@ -32,6 +32,7 @@ Depends:
     R (>= 3.5.0)
 Collate:
     'utils.R'
+    'utils_palettes.R'
     'read_data.R'
     'define_palette.R'
     'alignment_plot_functions.R'
