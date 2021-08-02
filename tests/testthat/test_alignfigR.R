@@ -31,20 +31,23 @@ test_that("test that read_alignment() returns a tibble with the correct number o
 test_that("test that read_alignment() returns a tibble with the correct number of columns", {
   expect_equal(
     ncol(tibble_fasta),
-    40)
+    39)
 })
 # Define Palette Tests
 
 test_that("test that define_palette() returns the correct palette", {
   expect_equal(names(define_palette(color_palette = "custom", uniques = c("A", "C", "G", "T"), custom_colors = c("dodgerblue", "cornsilk1", "red", "black"))), c("A", "C", "G", "T"))
   expect_equal(define_palette("purpyr"), purine_pyrimidine_pal)
-  expect_equal(define_palette("nucleotide"), nucleotide_pal)
+  expect_equal(define_palette("nucleotide", type = "Nucleotide"), nucleotide_pal)
+  expect_error(define_palette("nucleotide", type = "Character"))
   expect_equal(define_palette("default"), default_pal)
   expect_equal(define_palette("ocean"), ocean_pal)
   expect_equal(define_palette("forest"), forest_pal)
   expect_equal(define_palette("fire"), fire_pal)
   expect_equal(define_palette("floral"), floral_pal)
-  expect_equal(define_palette("clustal"), clustal_pal)
+  expect_equal(define_palette("clustal", type = "Protein"), clustal_pal)
+  expect_equal(define_palette("clustal", type = "Nucleotide"), nuc_clustal_pal)
+  expect_error(define_palette("clustal", type = "Character"))
   expect_equal(define_palette("zappo"), zappo_pal)
   expect_equal(define_palette("taylor"), taylor_pal)
   expect_equal(define_palette("hydrophobicity"), hydrophobicity_pal)
@@ -119,7 +122,7 @@ test_that("test that make_data_longer() has correct number of rows", {
     nrow(
       make_data_longer(
         tibble_fasta)),
-    10257)
+    9994)
 })
 
 # create_geom_rect_alignment Test
@@ -183,12 +186,13 @@ test_that("plot_site_frequencies() returns ggplot object",{
 
 # determine_type
 test_that("determine_type() allows the user to select the correct data_type",{
-  expect_true(type_protein == "Protein")
-  expect_true(type_character == "Character")
-  expect_true(type_nuc == "Nucleotide")
-  expect_error(determine_type(tibble_fasta, data_type = "sjfngowjf"))
-  expect_true(type_nuc_determine == "Nucleotide")
-  expect_true(type_character_determine == "Character")
+  expect_true(user_determine_protein_test == "Protein")
+  expect_true(user_determine_character_test == "Character")
+  expect_true(user_determine_nuc_test == "Nucleotide")
+  expect_error(determine_type(tibble_fasta, data_type = "shfkeht"))
+  expect_true(determine_type(tibble_fasta, data_type = "") == "Protein")
+  expect_true(determine_type(nucleotide_fasta, data_type = "") == "Nucleotide")
+  expect_true(determine_type(character_fasta, data_type = "") == "Character")
 })
 
 
