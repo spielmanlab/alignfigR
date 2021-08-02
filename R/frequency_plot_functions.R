@@ -72,7 +72,8 @@ plot_site_frequencies <- function(fasta_tibble,
   unique(data_longer$seq) -> unique_seqs
   define_palette(color_palette,
                  unique_seqs,
-                 custom_colors) -> pal
+                 custom_colors,
+                 type) -> pal
   prep_site_frequencies(data_longer) -> output_from_prep_site_frequencies
   plot_frequencies(output_from_prep_site_frequencies, 
                    pal,

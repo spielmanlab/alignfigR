@@ -101,9 +101,6 @@ plot_alignment <- function(fasta_tibble,
                            taxon_labels = FALSE,
                            legend_title = "Legend Title",
                            graph_title = "Graph Title") {
-  fasta_tibble[1,1] -> type_of_data
-  fasta_tibble %>%
-    dplyr::select(-type_data) -> fasta_tibble
   filter_taxa_and_sites(fasta_tibble,
                         taxa,
                         exclude_taxa,
@@ -114,7 +111,8 @@ plot_alignment <- function(fasta_tibble,
   unique(rect_alignment$seq) -> unique_seqs
   define_palette(color_palette,
                  unique_seqs,
-                 custom_colors) -> pal
+                 custom_colors,
+                 type) -> pal
   create_alignment(filtered_data,
                    rect_alignment,
                    pal,
