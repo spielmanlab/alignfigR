@@ -68,7 +68,8 @@ create_alignment <- function(data_filtered,
   plot +
     # sets the custom color palette as pal and the name of the legend
     ggplot2::scale_fill_manual(values=pal,
-                               name = legend_title) +
+                                name = legend_title,
+                               limits = force) +
     # sets the graph title as graph_title
     ggplot2::labs(title = graph_title) +
     ggplot2::theme_minimal()

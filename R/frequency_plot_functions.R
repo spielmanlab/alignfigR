@@ -31,7 +31,8 @@ plot_frequencies <- function(output_from_prep_site_frequencies, pal, legend_titl
                  fill = seq) +
     ggplot2::geom_bar(stat = "identity") +
     ggplot2::scale_fill_manual(values = pal,
-                               name = legend_title)+
+                                name = legend_title,
+                               limits = force)+
     ggplot2::labs(title = graph_title) +
     ggplot2::theme_minimal()-> plot
   return(plot)
