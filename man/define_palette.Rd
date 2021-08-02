@@ -4,7 +4,12 @@
 \alias{define_palette}
 \title{Assigns the color palette for plots, and allows you to select a custom palette}
 \usage{
-define_palette(color_palette = "default", uniques = NA, custom_colors = NA)
+define_palette(
+  color_palette = "default",
+  uniques = NA,
+  custom_colors = NA,
+  type = NULL
+)
 }
 \arguments{
 \item{color_palette}{The palette you wish to use. Options are "random", "dna", "rna", "custom", "free", "ocean", "fire", "forest" and "floral".}
@@ -12,6 +17,8 @@ define_palette(color_palette = "default", uniques = NA, custom_colors = NA)
 \item{uniques}{The protein/nucleotide identifiers used in your data}
 
 \item{custom_colors}{A string of the colors you wish to have in the palette that contains the same amount of colors as unique protein/nucleotide identifiers you have in your data. The first identifier in uniques will be assigned the first color in custom_colors and so on.}
+
+\item{type}{Type determined, or specified by user, in read_alignment()}
 }
 \value{
 Returns a color palette
