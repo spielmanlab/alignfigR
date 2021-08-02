@@ -1,9 +1,9 @@
 #' Defines Nucleotide Palette
-nucleotide_pal <- c("A"= "66F455", 
-                    "G"="FFAF4D",
-                    "C"= "EE4140", 
-                    "T"= "288BEA", 
-                    "U"= "288BEA")
+nucleotide_pal <- c("A"= "#64F83F", 
+                    "G"= "#EB413C",
+                    "C"= "#FFB340", 
+                    "T"= "#288BEA", 
+                    "U"= "#288BEA")
 purine_pyrimidine_pal <- c("A"= "FF86F6", 
                            "G"="36DFCF",
                            "C"= "FF86F6", 
@@ -101,6 +101,11 @@ clustal_pal <- c("A" = "#80A0F0", "G" = "#F09048",
                  "K" = "#F01505", "R" = "#F01505",
                  "P" = "#FFFF00", "-" = null_color,
                  "S" = "#00FF00", "X" = "black")
+nuc_clustal_pal <- c("A" = "#88B5E4", 
+                     "G" = "#DB9B58", 
+                     "C" = "#D88885", 
+                     "T" = "#67C219", 
+                     "U" = "#67C219")
 # Defines Zappo Palette
 zappo_pal <- c("A" = "#FFAFAF", "G" = "#FF00FF",
                "C" = "#FFFF00", "T" = "#00FF00",
