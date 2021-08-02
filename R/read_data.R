@@ -121,7 +121,7 @@ if (tolower(data_type) == "protein") {
 } else if (tolower(data_type) == "character") {
   type <- "Character"
 } else if (data_type != "") {
-  return("Not a Valid Data Type")
+  stop("Not a Valid Data Type")
 } else {
 make_data_longer(data) -> data_longer
 calculate_total_identifiers(data_longer) -> total_identifiers
