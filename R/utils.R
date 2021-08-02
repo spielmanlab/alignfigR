@@ -12,7 +12,7 @@ NULL
 
 #' Nulls
 #' @noRd
-column <- count <- value <- x1 <- x2 <- y1 <- y2 <- n <- type_data <- everything <- everything <-  NULL
+column <- count <- value <- x1 <- x2 <- y1 <- y2 <- n <- type_data <- everything <- everything <- NULL
 #' Defines color for absence of protein/nucleotide
 null_color <- "grey85"
 
@@ -32,7 +32,7 @@ nucs_protein_identifiers <- c("A", "G", "C" , "T" ,
                               "P" , "-", "S" , "X")
 
 # read_alignment() tests
-c("type_data", "column", "C9EABACTA301505",   "C9CABACTO298505",  
+c("column", "C9EABACTA301505",   "C9CABACTO298505",  
  "C9DABACTP301521" ,  "Q45745BACTU277497", "C1GBBACTZ253449",
  "C1GABACTU253446" ,  "C1HBBACTM256454"   ,"C1EABACTX258454" , 
  "C1EBBACTA257453",   "C1DABACTA258450"   ,"C1CABACTE258457" , 
@@ -46,7 +46,7 @@ c("type_data", "column", "C9EABACTA301505",   "C9CABACTO298505",
 "C16AACLOBI252441" , "C17AACLOBI265438" , "C25AABACTJ303514" ,
 "C13AABACTU328534" , "C14AABACTS320521" , "C18AAPAEPP344563") -> tibble_fasta_names
 # filter_taxa_and_sites()
-c("type_data", "column", "Q45745BACTU277497", "C1GBBACTZ253449", 
+c("column", "Q45745BACTU277497", "C1GBBACTZ253449", 
   "C1GABACTU253446", "C1HBBACTM256454",  "C1EABACTX258454",  
   "C1EBBACTA257453", "C1DABACTA258450",  "C1CABACTE258457" , 
   "Q45749BACTU257454", "C1JABACTU258449",  "C1JBBACTU258449", 
@@ -64,6 +64,7 @@ c("Taxa", "seq", "x1", "x2", "y1", "y2") -> create_geom_rect_alignment_names
 # Should I put this here
 utils::globalVariables("percent")
 utils::globalVariables("everything")
+utils::globalVariables("type")
 
 determine_type_threshold <- 0.9
 
