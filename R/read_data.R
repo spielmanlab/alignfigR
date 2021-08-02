@@ -35,6 +35,7 @@ read_alignment <- function(file, data_type = "") {
     stop("Your provided file is not an alignment. Please provide an alignment file in FASTA format to use alignfigR.")
   convert_seq_list_to_tibble(seq_list) -> data_tibble
   determine_type(data_tibble, data_type)
+  data_tibble
 }
 
 
@@ -115,32 +116,29 @@ make_data_longer <- function(filtered_data) {
 #' @return Returns a tibble of the data that contains a column containing the type of data
 determine_type <- function(data, data_type = "") {
 if (tolower(data_type) == "protein") {
-  type <- "Protein"
+  type <<- "Protein"
 } else if (tolower(data_type) == "nucleotide") {
-  type <- "Nucleotide"
+  type <<- "Nucleotide"
 } else if (tolower(data_type) == "character") {
-  type <- "Character"
+  type <<- "Character"
 } else if (data_type != "") {
   stop("Not a Valid Data Type")
 } else {
 make_data_longer(data) -> data_longer
 calculate_total_identifiers(data_longer) -> total_identifiers
 if (total_identifiers == 0) {
-  type <- "Character"
+  type <<- "Character"
 } else {
 calculate_total_seqs(data_longer) -> total_seqs
 calculate_total_nucs(data_longer) -> total_nucs
 total_nucs/total_seqs -> percent_nucs
 if (percent_nucs < determine_type_threshold) {
-  type <- "Protein"
+  type <<- "Protein"
 } else {
-  type <- "Nucleotide"
+  type <<- "Nucleotide"
 }
 }
 }
-data %>%
-  dplyr::mutate(type_data = type) %>%
-  dplyr::select(type_data, everything())
 }
 
 #' Calculates total seqs besides gaps in the data
