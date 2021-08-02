@@ -22,6 +22,5 @@ determine_type(tibble_fasta, data_type = "Character") -> user_determine_characte
 user_determine_character_test[1,1] -> type_character
 determine_type(tibble_fasta, data_type = "Nucleotide") -> user_determine_nuc_test
 user_determine_nuc_test[1,1] -> type_nuc
-determine_type(tibble_fasta, data_type = "sjfngowjf") -> user_determine_invalid_test
 nucleotide_fasta[1,1] -> type_nuc_determine
 character_fasta[1,1] -> type_character_determine
