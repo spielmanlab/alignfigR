@@ -3,13 +3,20 @@
 #' @param color_palette The palette you wish to use. Options are "random", "dna", "rna", "custom", "free", "ocean", "fire", "forest" and "floral".
 #' @param uniques The protein/nucleotide identifiers used in your data
 #' @param custom_colors A string of the colors you wish to have in the palette that contains the same amount of colors as unique protein/nucleotide identifiers you have in your data. The first identifier in uniques will be assigned the first color in custom_colors and so on.
+#' @param type Type determined, or specified by user, in read_alignment() 
 #' @return Returns a color palette
 define_palette <- function(color_palette = "default",
                            uniques = NA,
-                           custom_colors = NA){
-  if (tolower(color_palette) == "nucleotide"){
-    return(nucleotide_pal)
-  } else if (tolower(color_palette) == "custom") {
+                           custom_colors = NA,
+                           type = NULL){
+  if (tolower(color_palette) == "nucleotide") {
+   if (type == "Nucleotide") {
+   return(nucleotide_pal)
+  } else {
+    stop("Nucleotide palette assigned to a non-nucleotide alignment")
+  }
+  }
+  else if (tolower(color_palette) == "custom") {
     # palette is defined as custom_colors
     palette <- custom_colors
     # names of the palette are defined as the bases
@@ -32,7 +39,13 @@ define_palette <- function(color_palette = "default",
     return(floral_pal)
   } else if (tolower(color_palette) == "clustal") {
     # the palette is defined below
+    if (type == "Protein") {
     return(clustal_pal)
+    } else if (type == "Nucleotide") {
+      return(nuc_clustal_pal)
+    } else {
+      stop("Clustal palette given to character alignment ")
+    }
   } else if (tolower(color_palette) == "zappo") {
     # the palette is defined below
     return(zappo_pal)
