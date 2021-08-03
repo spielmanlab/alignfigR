@@ -24,7 +24,15 @@ define_palette <- function(color_palette = "default",
     return(palette)
   } else if (tolower(color_palette) == "default") {
     # the palette is defined below
-    return(default_pal)
+    if (type == "Protein") {
+      return(default_pal)
+    } else if (type == "Nucleotide") {
+      return(default_nuc_pal)
+    } else if (type == "Character") {
+      return(default_char_pal)
+    } else {
+      stop("Clustal palette given to character alignment ")
+    }
   } else if (tolower(color_palette) == "ocean") {
     # the palette is defined below
     return(ocean_pal)

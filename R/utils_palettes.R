@@ -26,6 +26,12 @@ default_pal <- c("A" = "limegreen", "G" = "lightgreen",
                "K" = "rosybrown4", "R" = "lightgoldenrod",
                "P" = "salmon", "-" = null_color,
                "S" = "darkred", "X" = "black")
+default_nuc_pal <- c("A" = "limegreen", "G" = "lightgreen",
+                 "C" = "hotpink1", "T" = "red",
+                 "U" = "red")
+default_char_pal <- c("0" = "limegreen", "1" = "lightgreen",
+                      "2" = "hotpink1", "3" = "red",
+                      "4" = "red")
 #' Defines Ocean Palette
 ocean_pal <- c("A" = "turquoise", "G" = "lightgreen",
                "C" = "turquoise4", "T" = "tan4",
