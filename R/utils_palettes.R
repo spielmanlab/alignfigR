@@ -4,7 +4,7 @@ nucleotide_pal <- c("A"= "#64F83F",
                     "C"= "#FFB340", 
                     "T"= "#288BEA", 
                     "U"= "#288BEA")
-purine_pyrimidine_pal <- c("A"= "FF86F6", 
+nucleotide_ry_pal <- c("A"= "FF86F6", 
                            "G"="36DFCF",
                            "C"= "FF86F6", 
                            "T"= "36DFCF", 
@@ -12,7 +12,7 @@ purine_pyrimidine_pal <- c("A"= "FF86F6",
                            "R"= "FF86F6",
                            "Y"= "36DFCF")
 #' Defines basic Palette
-default_pal <- c("A" = "limegreen", "G" = "lightgreen",
+protein_default_pal <- c("A" = "limegreen", "G" = "lightgreen",
                "C" = "hotpink1", "T" = "red",
                "U" = "lightsalmon", "J" = "maroon",
                "B" = "snow", "O" = "mediumorchid",
@@ -26,14 +26,14 @@ default_pal <- c("A" = "limegreen", "G" = "lightgreen",
                "K" = "rosybrown4", "R" = "lightgoldenrod",
                "P" = "salmon", "-" = null_color,
                "S" = "darkred", "X" = "black")
-default_nuc_pal <- c("A" = "limegreen", "G" = "lightgreen",
+nucleotide_default_pal <- c("A" = "limegreen", "G" = "lightgreen",
                  "C" = "hotpink1", "T" = "red",
                  "U" = "red")
-default_char_pal <- c("0" = "limegreen", "1" = "lightgreen",
+character_default_pal <- c("0" = "limegreen", "1" = "lightgreen",
                       "2" = "hotpink1", "3" = "red",
                       "4" = "red")
 #' Defines Ocean Palette
-ocean_pal <- c("A" = "turquoise", "G" = "lightgreen",
+protein_ocean_pal <- c("A" = "turquoise", "G" = "lightgreen",
                "C" = "turquoise4", "T" = "tan4",
                "U" = "steelblue", "J" = "springgreen4",
                "B" = "seashell", "O" = "seashell4",
@@ -48,7 +48,7 @@ ocean_pal <- c("A" = "turquoise", "G" = "lightgreen",
                "P" = "orange", "-" = null_color,
                "S" = "gray45", "X" = "aquamarine2")
 #' Defines Forest Palette
-forest_pal <- c("A" = "forestgreen", "G" = "darkgreen",
+protein_forest_pal <- c("A" = "forestgreen", "G" = "darkgreen",
                 "C" = "saddlebrown", "T" = "tan4",
                 "U" = "brown4", "J" = "springgreen4",
                 "B" = "black", "O" = "goldenrod4",
@@ -63,7 +63,7 @@ forest_pal <- c("A" = "forestgreen", "G" = "darkgreen",
                 "P" = "black", "-" = null_color,
                 "S" = "moccasin", "X" = "peachpuff4")
 #' Defines Fire Palette
-fire_pal <- c("A" = "red", "G" = "orange",
+protein_fire_pal <- c("A" = "red", "G" = "orange",
               "C" = "yellow", "T" = "firebrick4",
               "U" = "brown", "J" = "tan",
               "B" = "saddlebrown", "O" = "goldenrod",
@@ -78,7 +78,7 @@ fire_pal <- c("A" = "red", "G" = "orange",
               "P" = "lightgoldenrod", "-" = null_color,
               "S" = "tomato", "X" = "black")
 #' Defines Floral Palette
-floral_pal <- c("A" = "chartreuse2", "G" = "orange",
+protein_floral_pal <- c("A" = "chartreuse2", "G" = "orange",
                 "C" = "yellow", "T" = "red",
                 "U" = "pink", "J" = "dodgerblue",
                 "B" = "plum", "O" = "thistle",
@@ -93,7 +93,7 @@ floral_pal <- c("A" = "chartreuse2", "G" = "orange",
                 "P" = "mistyrose3", "-" = null_color,
                 "S" = "wheat", "X" = "black")
 # Defines clustal palette
-clustal_pal <- c("A" = "#80A0F0", "G" = "#F09048",
+protein_clustal_pal <- c("A" = "#80A0F0", "G" = "#F09048",
                  "C" = "#F08080", "T" = "#00FF00",
                  "U" = "cornsilk", "J" = "cornsilk",
                  "B" = "black", "O" = "cornsilk",
@@ -107,13 +107,13 @@ clustal_pal <- c("A" = "#80A0F0", "G" = "#F09048",
                  "K" = "#F01505", "R" = "#F01505",
                  "P" = "#FFFF00", "-" = null_color,
                  "S" = "#00FF00", "X" = "black")
-nuc_clustal_pal <- c("A" = "#88B5E4", 
+nucleotide_clustal_pal <- c("A" = "#88B5E4", 
                      "G" = "#DB9B58", 
                      "C" = "#D88885", 
                      "T" = "#67C219", 
                      "U" = "#67C219")
 # Defines Zappo Palette
-zappo_pal <- c("A" = "#FFAFAF", "G" = "#FF00FF",
+protein_zappo_pal <- c("A" = "#FFAFAF", "G" = "#FF00FF",
                "C" = "#FFFF00", "T" = "#00FF00",
                "U" = "cornsilk", "J" = "cornsilk",
                "B" = "black", "O" = "cornsilk",
@@ -128,7 +128,7 @@ zappo_pal <- c("A" = "#FFAFAF", "G" = "#FF00FF",
                "P" = "#FF00FF", "-" = null_color,
                "S" = "#00FF00", "X" = "black")
 # Defines Taylor Palette
-taylor_pal <- c("A" = "#CCFF00", "G" = "#FF9900",
+protein_taylor_pal <- c("A" = "#CCFF00", "G" = "#FF9900",
                 "C" = "#FFFF00", "T" = "#FF6600",
                 "U" = "cornsilk", "J" = "cornsilk",
                 "B" = "black", "O" = "cornsilk",
@@ -143,7 +143,7 @@ taylor_pal <- c("A" = "#CCFF00", "G" = "#FF9900",
                 "P" = "#FFCC00", "-" = null_color,
                 "S" = "#FF3300", "X" = "black")
 # Defines Hydrophobicity palette
-hydrophobicity_pal <- c("A" = "#AD0052", "G" = "#6A0095",
+protein_hydrophobicity_pal <- c("A" = "#AD0052", "G" = "#6A0095",
                  "C" = "#C2003D", "T" = "#61009E",
                  "U" = "cornsilk", "J" = "cornsilk",
                  "B" = "#0C00F3", "O" = "cornsilk",
@@ -158,7 +158,7 @@ hydrophobicity_pal <- c("A" = "#AD0052", "G" = "#6A0095",
                  "P" = "#4600B9", "-" = null_color,
                  "S" = "#5E00A1", "X" = "#680097")
 # Defines Helix Propensity Palette
-helix_propensity_pal <- c("A" = "#E718E7", "G" = "#00FF00",
+protein_helix_propensity_pal <- c("A" = "#E718E7", "G" = "#00FF00",
                           "C" = "#23DC23", "T" = "#47B847",
                           "U" = "cornsilk", "J" = "cornsilk",
                           "B" = "#49B649", "O" = "cornsilk",
@@ -173,7 +173,7 @@ helix_propensity_pal <- c("A" = "#E718E7", "G" = "#00FF00",
                           "P" = "#00FF00", "-" = null_color,
                           "S" = "#36C936", "X" = "#758A75")
 # Defines Strand Propensity Palette
-strand_propensity_pal <- c("A" = "#5858A7", "G" = "#4949B6",
+protein_strand_propensity_pal <- c("A" = "#5858A7", "G" = "#4949B6",
                            "C" = "#9D9D62", "T" = "#9D9D62",
                            "U" = "cornsilk", "J" = "cornsilk",
                            "B" = "#4343BC", "O" = "cornsilk",
@@ -187,7 +187,7 @@ strand_propensity_pal <- c("A" = "#5858A7", "G" = "#4949B6",
                            "K" = "#4747B8", "R" = "#6B6B94",
                            "P" = "#2323DC", "-" = null_color,
                            "S" = "4949B6", "X" = "#797986")
-turn_propensity_pal <- c("A" = "#2CD3D3", "G" = "#FF0000",
+protein_turn_propensity_pal <- c("A" = "#2CD3D3", "G" = "#FF0000",
                            "C" = "#A85757", "T" = "#738C8C",
                            "U" = "cornsilk", "J" = "cornsilk",
                            "B" = "#F30C0C", "O" = "cornsilk",
@@ -202,7 +202,7 @@ turn_propensity_pal <- c("A" = "#2CD3D3", "G" = "#FF0000",
                            "P" = "#F60909", "-" = null_color,
                            "S" = "#E11E1E", "X" = "#7C8383")
 # Defines Buried Index Palette
-buried_index_pal <- c("A" = "#00A35C", "G" = "#009D62",
+protein_buried_index_pal <- c("A" = "#00A35C", "G" = "#009D62",
                       "C" = "#0000FF", "T" = "#00DB24",
                       "U" = "cornsilk", "J" = "cornsilk",
                       "B" = "#00EB14", "O" = "cornsilk",
