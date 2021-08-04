@@ -25,59 +25,59 @@ define_palette <- function(color_palette = "default",
   } else if (tolower(color_palette) == "default") {
     # the palette is defined below
     if (type == "Protein") {
-      return(default_pal)
+      return(protein_default_pal)
     } else if (type == "Nucleotide") {
-      return(default_nuc_pal)
+      return(nucleotide_default_pal)
     } else if (type == "Character") {
-      return(default_char_pal)
+      return(character_default_pal)
     } else {
       stop("Clustal palette given to character alignment ")
     }
   } else if (tolower(color_palette) == "ocean") {
     # the palette is defined below
-    return(ocean_pal)
+    return(protein_ocean_pal)
   } else if (tolower(color_palette) == "forest") {
     # the palette is defined below
-    return(forest_pal)
+    return(protein_forest_pal)
   } else if (tolower(color_palette) == "fire") {
     # the palette is defined below
-    return(fire_pal)
+    return(protein_fire_pal)
   } else if (tolower(color_palette) == "floral") {
     # the palette is defined below
-    return(floral_pal)
+    return(protein_floral_pal)
   } else if (tolower(color_palette) == "clustal") {
     # the palette is defined below
     if (type == "Protein") {
-    return(clustal_pal)
+    return(protein_clustal_pal)
     } else if (type == "Nucleotide") {
-      return(nuc_clustal_pal)
+      return(nucleotide_clustal_pal)
     } else {
       stop("Clustal palette given to character alignment ")
     }
   } else if (tolower(color_palette) == "zappo") {
     # the palette is defined below
-    return(zappo_pal)
+    return(protein_zappo_pal)
   } else if (tolower(color_palette) == "taylor") {
     # the palette is defined below
-    return(taylor_pal)
+    return(protein_taylor_pal)
   } else if (tolower(color_palette) == "hydrophobicity") {
     # the palette is defined below
-    return(hydrophobicity_pal)
+    return(protein_hydrophobicity_pal)
   } else if (tolower(color_palette) == "helixpro") {
     # the palette is defined below
-    return(helix_propensity_pal)
+    return(protein_helix_propensity_pal)
   } else if (tolower(color_palette) == "strandpro") {
     # the palette is defined below
-    return(strand_propensity_pal)
+    return(protein_strand_propensity_pal)
   } else if (tolower(color_palette) == "turnpro") {
     # the palette is defined below
-    return(turn_propensity_pal)
+    return(protein_turn_propensity_pal)
   } else if (tolower(color_palette) == "buried index") {
     # the palette is defined below
-    return(buried_index_pal)
+    return(protein_buried_index_pal)
   } else if (tolower(color_palette) == "purpyr") {
     # the palette is defined below
-    return(purine_pyrimidine_pal)
+    return(nucleotide_ry_pal)
   } else {
     stop("Not a valid palette.")
   }
