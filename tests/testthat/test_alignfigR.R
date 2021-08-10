@@ -58,6 +58,8 @@ test_that("test that define_palette() returns the correct palette", {
   expect_equal(define_palette("strandpro"), protein_strand_propensity_pal)
   expect_equal(define_palette("turnpro"), protein_turn_propensity_pal)
   expect_equal(define_palette("buried index"), protein_buried_index_pal)
+  expect_equal(define_palette("cinema", type = "Protein"), protein_cinema_pal)
+  expect_error(define_palette("cinema", type = "Character"))
   expect_error(define_palette("notapalette"))
 })
 
