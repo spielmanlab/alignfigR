@@ -78,7 +78,13 @@ define_palette <- function(color_palette = "default",
   } else if (tolower(color_palette) == "purpyr") {
     # the palette is defined below
     return(nucleotide_ry_pal)
-  } else {
+  } else if (tolower(color_palette) == "cinema") {
+    if (type == "Protein") {
+      return(protein_cinema_pal)
+    } else {
+      stop("Protein palette assigned to a non-protein dataset")
+    } 
+    } else {
     stop("Not a valid palette.")
-  }
+  } 
 }
