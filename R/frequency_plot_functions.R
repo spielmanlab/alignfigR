@@ -3,7 +3,7 @@
 #' @param data_longer Tibble output from make_data_longer()
 #' @return Returns a tibble that is ready for plot_frequencies()
 prep_site_frequencies <- function(data_longer) {
-  data_longer[order(data_longer$Taxa),] -> data_alphabetical
+  dplyr::arrange(data_longer) -> data_alphabetical
   # Counts the number of rows and saves it to number_of_rows
   as.integer(dplyr::count(data_alphabetical)) -> number_of_rows
   # Determines the length of each individual taxon
@@ -29,13 +29,12 @@ plot_frequencies <- function(output_from_prep_site_frequencies, pal, legend_titl
     ggplot2::aes(x = column, 
                  y = percent, 
                  fill = seq) +
-    ggplot2::geom_bar(stat = "identity") +
+    ggplot2::geom_col() +
     ggplot2::scale_fill_manual(values = pal,
                                 name = legend_title,
                                limits = force)+
     ggplot2::labs(title = graph_title) +
-    ggplot2::theme_minimal()-> plot
-  return(plot)
+    ggplot2::theme_minimal()
 }
 
 #' Creates the site frequency spectra
