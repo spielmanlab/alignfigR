@@ -130,34 +130,34 @@ test_that("test that make_data_longer() has correct number of rows", {
     9994)
 })
 
-# create_geom_rect_alignment Test
+# prep_geom_rect_alignment Test
 
-test_that("test that create_geom_rect() returns a tibble", {
+test_that("test that prep_geom_rect() returns a tibble", {
   expect_s3_class(
-    create_geom_rect_alignment(
+    prep_geom_rect_alignment(
       data_longer_test),
     c("tbl_df","tbl", "data.frame"))
 })
 
-test_that("test that create_geom_rect_alignment() has correct number of rows", {
+test_that("test that prep_geom_rect_alignment() has correct number of rows", {
   expect_equal(
     nrow(
-    create_geom_rect_alignment(data_longer_test)),
+    prep_geom_rect_alignment(data_longer_test)),
     9994)
 })
 
-test_that("test that create_geom_rect_alignment() has correct number of cols", {
+test_that("test that prep_geom_rect_alignment() has correct number of cols", {
   expect_equal(
     ncol(
-      create_geom_rect_alignment(data_longer_test)),
+      prep_geom_rect_alignment(data_longer_test)),
     6)
 })
 
-test_that("test that create_geom_rect_alignment() has correct column names", {
+test_that("test that prep_geom_rect_alignment() has correct column names", {
   expect_equal(
     names(
-      create_geom_rect_alignment(data_longer_test)),
-    create_geom_rect_alignment_names)
+      prep_geom_rect_alignment(data_longer_test)),
+    prep_geom_rect_alignment_names)
 })
 
 # Plot Alignment

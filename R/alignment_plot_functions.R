@@ -2,7 +2,7 @@
 #'
 #' @param data_longer Output from make_data_longer
 #' @return Returns a tibble that contains columns x1, x2, y1, and y2; all with correct values for an alignment
-create_geom_rect_alignment <- function(data_longer) {
+prep_geom_rect_alignment <- function(data_longer) {
   data_longer[order(data_longer$Taxa),] -> data_alphabetical
   # Counts the number of rows and saves it to number_of_rows
   as.integer(dplyr::count(data_alphabetical)) -> number_of_rows
@@ -107,7 +107,7 @@ plot_alignment <- function(fasta_tibble,
                         sites,
                         exclude_sites) -> filtered_data
   make_data_longer(filtered_data) -> data_longer
-  create_geom_rect_alignment(data_longer) -> rect_alignment
+  prep_geom_rect_alignment(data_longer) -> rect_alignment
   unique(rect_alignment$seq) -> unique_seqs
   define_palette(color_palette,
                  unique_seqs,

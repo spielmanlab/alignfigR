@@ -6,10 +6,10 @@ incorrect_protein_file <- file.path("data", "incorrect_protein_tibble_fasta.csv"
 
 data_longer_file <- file.path("data", "data_longer_test.csv")
 
-create_geom_rect_alignment_file <- file.path("data", "create_geom_rect_alignment_test.csv")
+prep_geom_rect_alignment_file <- file.path("data", "create_geom_rect_alignment_test.csv")
 
 readr::read_csv(data_longer_file) -> data_longer_test
-readr::read_csv(create_geom_rect_alignment_file) -> create_geom_rect_alignment_test
+readr::read_csv(prep_geom_rect_alignment_file) -> prep_geom_rect_alignment_test
 readr::read_csv(incorrect_protein_file) -> incorrect_protein_test
 tibble_fasta <- read_alignment(protein_file)
 nucleotide_fasta <- read_alignment(nucleotide_file)

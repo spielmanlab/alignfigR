@@ -25,5 +25,5 @@ c("column", "Q45745BACTU277497", "C1GBBACTZ253449",
   "C4AABACTI322528", "CAAABACTI308500",  "C4BABACTI283470",  
   "C16AACLOBI252441", "C17AACLOBI265438",  "C25AABACTJ303514", 
   "C13AABACTU328534", "C14AABACTS320521",  "C18AAPAEPP344563") -> taxa_exclusion_test
-# create_geom_rect_alignment()
-c("Taxa", "seq", "x1", "x2", "y1", "y2") -> create_geom_rect_alignment_names
+# prep_geom_rect_alignment()
+c("Taxa", "seq", "x1", "x2", "y1", "y2") -> prep_geom_rect_alignment_names
