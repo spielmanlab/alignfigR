@@ -95,10 +95,10 @@ filter_taxa_and_sites <- function(fasta_tibble,
 
 #' Pivots the output from filter_taxa_and_sites longer
 #'
-#' @param filtered_data The output from convert_seq_list_to_tibble
+#' @param data The output from filter_taxa_and_sites
 #' @return Returns a longer tibble of filtered_data
-make_data_longer <- function(filtered_data) {
-  filtered_data %>%
+make_data_longer <- function(data) {
+  data %>%
     # Removes column 'column'
     dplyr::select(-column) %>%
     # Pivots data longer, selects all columns
@@ -108,6 +108,29 @@ make_data_longer <- function(filtered_data) {
                         # Moves values to 'seq' and sets it equal to data_longer
                         values_to = "seq")
 }
+
+#' Combines filter_taxa_and_sites and make_data_longer
+#'
+#' @param fasta_tibble Tibble output from read_alignment()
+#' @param taxa List of desired or undesired taxa
+#' @param exclude_taxa Determines if you wish to only include or exclude the taxa in 'taxa'
+#' @param sites List of desired positions in the fasta sequence
+#' @param exclude_sites Determines if you wish to only include or exclude the sites in 'sites'
+#' @return Returns a longer tibble of filtered_data
+filter_and_make_data_longer <- function(fasta_tibble,
+                                        taxa,
+                                        exclude_taxa,
+                                        sites,
+                                        exclude_sites) {
+  filter_taxa_and_sites(fasta_tibble,
+                        taxa,
+                        exclude_taxa,
+                        sites,
+                        exclude_sites) %>%
+    make_data_longer()
+}
+
+
 
 #' Allows the package to determine data type, as well as allowing the user to specify this
 #'

@@ -4,10 +4,10 @@
 \alias{make_data_longer}
 \title{Pivots the output from filter_taxa_and_sites longer}
 \usage{
-make_data_longer(filtered_data)
+make_data_longer(data)
 }
 \arguments{
-\item{filtered_data}{The output from convert_seq_list_to_tibble}
+\item{data}{The output from filter_taxa_and_sites}
 }
 \value{
 Returns a longer tibble of filtered_data

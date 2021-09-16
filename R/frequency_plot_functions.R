@@ -59,17 +59,13 @@ plot_site_frequencies <- function(fasta_tibble,
                                   custom_colors = NA,
                                   legend_title = "Legend Title",
                                   graph_title = "Graph Title") {
-  filter_taxa_and_sites(fasta_tibble,
-                        taxa,
-                        exclude_taxa,
-                        sites,
-                        exclude_sites) -> filtered_data
-  make_data_longer(filtered_data) -> data_longer
-  unique(data_longer$seq) -> unique_seqs
-  define_palette(color_palette,
-                 unique_seqs,
-                 custom_colors,
-                 type) -> pal
+  filter_and_make_data_longer(fasta_tibble,
+                              taxa,
+                              exclude_taxa,
+                              sites,
+                              exclude_sites) -> data_longer
+  determine_palette(data_longer, 
+                    color_palette) -> pal
   prep_site_frequencies(data_longer) -> output_from_prep_site_frequencies
   plot_frequencies(output_from_prep_site_frequencies, 
                    pal,

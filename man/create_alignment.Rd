@@ -5,7 +5,7 @@
 \title{Creates the plot for plot_alignment}
 \usage{
 create_alignment(
-  data_filtered,
+  data_longer,
   rect_alignment,
   pal,
   taxon_labels = FALSE,
@@ -14,7 +14,7 @@ create_alignment(
 )
 }
 \arguments{
-\item{data_filtered}{The Output from filter_taxa_and_sites}
+\item{data_longer}{Output from make_data_longer}
 
 \item{rect_alignment}{The Output from create_rect_alignment}
 

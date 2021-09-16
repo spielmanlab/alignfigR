@@ -25,14 +25,14 @@ prep_geom_rect_alignment <- function(data_longer) {
 
 #' Creates the plot for plot_alignment
 #'
-#' @param data_filtered The Output from filter_taxa_and_sites
+#' @param data_longer Output from make_data_longer
 #' @param rect_alignment The Output from create_rect_alignment
 #' @param pal The output from define_palette
 #' @param taxon_labels Determines if you would like rows to be labeled by their respective taxon
 #' @param legend_title A String of what you want the legend title to be
 #' @param graph_title A String of what you want the graph title to be
 #' @return Returns a Multiple Sequence Alignment
-create_alignment <- function(data_filtered,
+create_alignment <- function(data_longer,
                              rect_alignment,
                              pal,
                              taxon_labels = FALSE,
@@ -62,7 +62,7 @@ create_alignment <- function(data_filtered,
                                               fill = seq),
                          linetype=0) +
       # places the taxon identifiers and column along the y axis
-      ggplot2::scale_y_discrete(limits = names(data_filtered))
+      ggplot2::scale_y_discrete(limits = unique(data_longer$Taxa))
   }
 
   plot +
@@ -101,19 +101,15 @@ plot_alignment <- function(fasta_tibble,
                            taxon_labels = FALSE,
                            legend_title = "Legend Title",
                            graph_title = "Graph Title") {
-  filter_taxa_and_sites(fasta_tibble,
-                        taxa,
-                        exclude_taxa,
-                        sites,
-                        exclude_sites) -> filtered_data
-  make_data_longer(filtered_data) -> data_longer
+  filter_and_make_data_longer(fasta_tibble,
+                              taxa,
+                              exclude_taxa,
+                              sites,
+                              exclude_sites) -> data_longer
+  determine_palette(data_longer, 
+                    color_palette) -> pal
   prep_geom_rect_alignment(data_longer) -> rect_alignment
-  unique(rect_alignment$seq) -> unique_seqs
-  define_palette(color_palette,
-                 unique_seqs,
-                 custom_colors,
-                 type) -> pal
-  create_alignment(filtered_data,
+  create_alignment(data_longer,
                    rect_alignment,
                    pal,
                    taxon_labels = taxon_labels,

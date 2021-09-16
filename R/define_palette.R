@@ -88,3 +88,18 @@ define_palette <- function(color_palette = "default",
     stop("Not a valid palette.")
   } 
 }
+#' Returns the palette specified by define_palette
+#' 
+#' @param data_longer Output from make_data_longer
+#' @param color_palette The palette you wish to use. Options are "random", "dna", "rna", "custom", "free", "ocean", "fire", "forest" and "floral".
+#' @param custom_colors A string of the colors you wish to have in the palette that contains the same amount of colors as unique protein/nucleotide identifiers you have in your data. The first identifier in uniques will be assigned the first color in custom_colors and so on.
+#' @return Returns a color palette
+determine_palette <- function(data_longer,
+                              color_palette,
+                              custom_colors) {
+  unique(data_longer$seq) -> unique_seqs
+  define_palette(color_palette,
+                 unique_seqs,
+                 custom_colors,
+                 type)
+}
