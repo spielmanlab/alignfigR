@@ -101,13 +101,17 @@ plot_alignment <- function(fasta_tibble,
                            taxon_labels = FALSE,
                            legend_title = "Legend Title",
                            graph_title = "Graph Title") {
-  filter_and_make_data_longer(fasta_tibble,
+  filter_and_determine_palette(fasta_tibble,
                               taxa,
                               exclude_taxa,
                               sites,
-                              exclude_sites) -> data_longer
-  determine_palette(data_longer, 
-                    color_palette) -> pal
+                              exclude_sites,
+                              color_palette,
+                              custom_colors) -> output_list
+  output_list[1] -> data_longer
+  data_longer$data_longer -> data_longer
+  output_list[2] -> pal
+  pal$pal -> pal
   prep_geom_rect_alignment(data_longer) -> rect_alignment
   create_alignment(data_longer,
                    rect_alignment,

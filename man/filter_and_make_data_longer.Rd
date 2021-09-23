@@ -6,10 +6,10 @@
 \usage{
 filter_and_make_data_longer(
   fasta_tibble,
-  taxa,
-  exclude_taxa,
-  sites,
-  exclude_sites
+  taxa = c(),
+  exclude_taxa = FALSE,
+  sites = c(),
+  exclude_sites = FALSE
 )
 }
 \arguments{

@@ -118,16 +118,45 @@ make_data_longer <- function(data) {
 #' @param exclude_sites Determines if you wish to only include or exclude the sites in 'sites'
 #' @return Returns a longer tibble of filtered_data
 filter_and_make_data_longer <- function(fasta_tibble,
-                                        taxa,
-                                        exclude_taxa,
-                                        sites,
-                                        exclude_sites) {
+                                        taxa = c(),
+                                        exclude_taxa = FALSE,
+                                        sites = c(),
+                                        exclude_sites = FALSE) {
   filter_taxa_and_sites(fasta_tibble,
                         taxa,
                         exclude_taxa,
                         sites,
                         exclude_sites) %>%
     make_data_longer()
+}
+#' Combines filter_and_make_data_longer with define_palette
+#'
+#' @param fasta_tibble Tibble output from read_alignment()
+#' @param taxa List of desired or undesired taxa
+#' @param exclude_taxa Determines if you wish to only include or exclude the taxa in 'taxa'
+#' @param sites List of desired positions in the fasta sequence
+#' @param exclude_sites Determines if you wish to only include or exclude the sites in 'sites'
+#' @param color_palette The palette you wish to use. Options are "random", "dna", "rna", "custom", "free", "ocean", "fire", "forest" and "floral".
+#' @param custom_colors A string of the colors you wish to have in the palette that contains the same amount of colors as unique protein/nucleotide identifiers you have in your data. The first identifier in uniques will be assigned the first color in custom_colors and so on.
+#' @return Returns a longer tibble of filtered_data
+filter_and_determine_palette <- function(fasta_tibble,
+                                         taxa,
+                                         exclude_taxa,
+                                         sites,
+                                         exclude_sites,
+                                         color_palette,
+                                         custom_colors) {
+  filter_and_make_data_longer(fasta_tibble,
+                              taxa,
+                              exclude_taxa,
+                              sites,
+                              exclude_sites) -> data_longer
+  unique(data_longer$seq) -> unique_seqs
+  define_palette(color_palette,
+                 unique_seqs,
+                 custom_colors,
+                 type) -> pal
+  return(list("data_longer"=data_longer, "pal" = pal))
 }
 
 

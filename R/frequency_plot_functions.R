@@ -3,7 +3,7 @@
 #' @param data_longer Tibble output from make_data_longer()
 #' @return Returns a tibble that is ready for plot_frequencies()
 prep_site_frequencies <- function(data_longer) {
-  dplyr::arrange(data_longer) -> data_alphabetical
+  data_longer[order(data_longer$Taxa),] -> data_alphabetical
   # Counts the number of rows and saves it to number_of_rows
   as.integer(dplyr::count(data_alphabetical)) -> number_of_rows
   # Determines the length of each individual taxon
@@ -59,13 +59,17 @@ plot_site_frequencies <- function(fasta_tibble,
                                   custom_colors = NA,
                                   legend_title = "Legend Title",
                                   graph_title = "Graph Title") {
-  filter_and_make_data_longer(fasta_tibble,
-                              taxa,
-                              exclude_taxa,
-                              sites,
-                              exclude_sites) -> data_longer
-  determine_palette(data_longer, 
-                    color_palette) -> pal
+  filter_and_determine_palette(fasta_tibble,
+                               taxa,
+                               exclude_taxa,
+                               sites,
+                               exclude_sites,
+                               color_palette,
+                               custom_colors) -> output_list
+  output_list[1] -> data_longer
+  data_longer$data_longer -> data_longer
+  output_list[2] -> pal
+  pal$pal -> pal
   prep_site_frequencies(data_longer) -> output_from_prep_site_frequencies
   plot_frequencies(output_from_prep_site_frequencies, 
                    pal,
