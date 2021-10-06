@@ -5,7 +5,7 @@
 prep_site_frequencies <- function(data_longer) {
   data_longer[order(data_longer$Taxa),] -> data_alphabetical
   # Counts the number of rows and saves it to number_of_rows
-  as.integer(dplyr::count(data_alphabetical)) -> number_of_rows
+  nrow(data_alphabetical) -> number_of_rows
   # Determines the length of each individual taxon
   number_of_rows/as.integer(dplyr::count(unique(data_alphabetical[1]))) -> length_of_taxa
   data_alphabetical %>%
@@ -66,10 +66,8 @@ plot_site_frequencies <- function(fasta_tibble,
                                exclude_sites,
                                color_palette,
                                custom_colors) -> output_list
-  output_list[1] -> data_longer
-  data_longer$data_longer -> data_longer
-  output_list[2] -> pal
-  pal$pal -> pal
+  output_list$data_longer -> data_longer
+  output_list$pal -> pal
   prep_site_frequencies(data_longer) -> output_from_prep_site_frequencies
   plot_frequencies(output_from_prep_site_frequencies, 
                    pal,
