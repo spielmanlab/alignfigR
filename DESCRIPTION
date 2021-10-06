@@ -1,0 +1,42 @@
+Package: alignfigR
+Type: Package
+Title: Create Figures of Multiple Sequence Alignments from Fasta Files
+Version: 0.1.0
+Authors@R: 
+    c(person(given = "Stephanie",
+             family = "Spielman",
+             role = c("aut", "cre"),
+             email = "spielman@rowan.edu"),
+      person(given = "Richard",
+             family = "Demko",
+             role = "aut"))
+Description: Given a file of FASTA sequences, makes a figure using ggplot2.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    dplyr (>= 1.0.0),
+    ggplot2 (>= 3.3.2),
+    tidyr (>= 1.0.0),
+    magrittr,
+    tibble, 
+    tidyselect,
+    readr
+Suggests: 
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown
+URL: https://github.com/spielmanlab/alignfigR
+BugReports: https://github.com/spielmanlab/alignfigR/issues
+Depends:
+    R (>= 3.5.0)
+Collate:
+    'utils.R'
+    'utils_palettes.R'
+    'utils_tests.R'
+    'read_data.R'
+    'define_palette.R'
+    'alignment_plot_functions.R'
+    'frequency_plot_functions.R'
+RoxygenNote: 7.1.1
+Config/testthat/edition: 3
